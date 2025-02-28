@@ -16,7 +16,7 @@ function App() {
         <Route path="/level1" element={<Level1 />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/level2" element={<Level2 />} />
-        <Route path="/score" element={<Score />} />
+       <Route path="/score" element={<Score />} />
         <Route path="/Level3" element={<Level3 />} />
       </Routes>
     </Router>

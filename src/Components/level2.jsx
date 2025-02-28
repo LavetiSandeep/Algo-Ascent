@@ -9,7 +9,7 @@ const Level2 = () => {
   const [answers, setAnswers] = useState({});
   const [score, setScore] = useState(null);
   const [submitted, setSubmitted] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(20); // 20 minutes
+  const [timeLeft, setTimeLeft] = useState(200); // 20 minutes
   const navigate = useNavigate();
   const location = useLocation();
   //const level1Score = location.state?.level1Score || 0; // Get Level 1 score
@@ -76,7 +76,7 @@ const Level2 = () => {
     } catch (error) {
       console.error("Error submitting answers:", error);
     }
-
+    localStorage.setItem("finalScore", finalScore);
     navigate("/score", {
       state: {
         level1Score,
@@ -85,6 +85,9 @@ const Level2 = () => {
       },
     });
   };
+  const totalPossibleScore = 35 + level1Score; // Max score from Level 1 + Level 2
+  //const passingScore = (2 / 3) * totalPossibleScore; // 2/3 of total score
+
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 text-white bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
@@ -145,6 +148,8 @@ const Level2 = () => {
               Your Score: {score} / 35
             </div>
           )}
+
+        
         </>
       ) : (
         <p className="text-gray-300">Loading questions...</p>
@@ -154,3 +159,16 @@ const Level2 = () => {
 };
 
 export default Level2;
+
+
+
+/*{submitted && (level1Score + score) > passingScore && (
+            <button
+              className="px-6 py-3 mt-6 text-lg font-semibold text-white bg-purple-600 rounded-lg hover:bg-purple-700"
+              onClick={() => navigate("/level3")}
+            >
+              Proceed to Level 3 🚀
+            </button>
+          )}
+
+          */
