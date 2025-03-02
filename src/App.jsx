@@ -5,7 +5,8 @@ import Level1 from "./Components/Level1";
 import Leaderboard from "./Components/Leaderboard";
 import Level2 from "./Components/level2";
 import Score from "./Components/score";
-import Level3 from "./Components/Level3"
+import Level3 from "./Components/Level3.jsx";
+
 
 function App() {
   return (
@@ -13,11 +14,12 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/home" element={<HomePage />} />
-        <Route path="/level1" element={<Level1 />} />
+        <Route path="/Level1" element={<Level1 />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/level2" element={<Level2 />} />
        <Route path="/score" element={<Score />} />
-        <Route path="/Level3" element={<Level3 />} />
+       <Route path="/Level3" element={<Level3 />} />
+
       </Routes>
     </Router>
   );
