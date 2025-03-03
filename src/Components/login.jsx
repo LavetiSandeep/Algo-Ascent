@@ -7,14 +7,34 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (email === "test@example.com" && password === "password") {
-      navigate("/home");
-    } else {
-      setError("Invalid email or password");
+    setError(""); // Clear previous errors
+  
+    try {
+      const response = await fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        // Assuming the backend returns a token or user info
+        localStorage.setItem("email", data.email);
+        navigate("/home");
+      } else {
+        setError(data.message || "Invalid email or password");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      setError("Something went wrong. Please try again.");
     }
   };
+  
 
   return (
     <div className="flex items-center justify-center h-screen bg-gradient-to-r from-blue-400 to-purple-600">

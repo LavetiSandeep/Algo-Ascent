@@ -5,74 +5,144 @@ const Level1 = () => {
   const navigate = useNavigate();
   const [score, setScore] = useState(0); // Start fresh
   const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOptions, setSelectedOptions] = useState({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(20 ); // 20 minutes countdown
+  const [timeLeft, setTimeLeft] = useState(20); // 20 minutes countdown
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [scoreUpdatedQuestions, setScoreUpdatedQuestions] = useState({});
 
   const questions = [
-    { question: "What does HTML stand for?", options: ["HyperText Markup Language", "HighText Machine Language", "HyperTransfer Markup Language", "None of the above"], correctAnswer: "HyperText Markup Language" },
-    { question: "Which data structure uses LIFO?", options: ["Queue", "Stack", "Linked List", "Array"], correctAnswer: "Stack" },
-    { question: "Which language is mainly used for Android development?", options: ["Java", "Python", "C#", "Swift"], correctAnswer: "Java" },
-    { question: "What is the time complexity of binary search?", options: ["O(n)", "O(log n)", "O(n log n)", "O(1)"], correctAnswer: "O(log n)" },
-    { question: "Which protocol is used for secure communication over the internet?", options: ["HTTP", "FTP", "SSH", "HTTPS"], correctAnswer: "HTTPS" },
+    {
+      question: "What does HTML stand for?",
+      options: [
+        "HyperText Markup Language",
+        "HighText Machine Language",
+        "HyperTransfer Markup Language",
+        "None of the above",
+      ],
+      correctAnswer: "HyperText Markup Language",
+    },
+    {
+      question: "Which data structure uses LIFO?",
+      options: ["Queue", "Stack", "Linked List", "Array"],
+      correctAnswer: "Stack",
+    },
+    {
+      question: "Which language is mainly used for Android development?",
+      options: ["Java", "Python", "C#", "Swift"],
+      correctAnswer: "Java",
+    },
+    {
+      question: "What is the time complexity of binary search?",
+      options: ["O(n)", "O(log n)", "O(n log n)", "O(1)"],
+      correctAnswer: "O(log n)",
+    },
+    {
+      question:
+        "Which protocol is used for secure communication over the internet?",
+      options: ["HTTP", "FTP", "SSH", "HTTPS"],
+      correctAnswer: "HTTPS",
+    },
   ];
 
-  useEffect(() => {
-    if (timeLeft === 0) {
-      handleSubmit(); // Auto-submit when time expires
-    }
-
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => prev - 1);
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [timeLeft]);
-
   const handleOptionClick = (option) => {
-    setSelectedOption(option);
+    setSelectedOptions((prev) => ({
+      ...prev,
+      [currentQuestionIndex]: option,
+    }));
   };
 
   const handleNext = () => {
-    if (selectedOption === questions[currentQuestionIndex].correctAnswer) {
+    const option = selectedOptions[currentQuestionIndex]?.trim();
+    const correctAnswer = questions[currentQuestionIndex].correctAnswer.trim();
+
+    console.log(score);
+    if (option === correctAnswer && !scoreUpdatedQuestions[currentQuestionIndex]) {
       setScore((prevScore) => prevScore + 10);
+      setScoreUpdatedQuestions((prev) => ({
+        ...prev,
+        [currentQuestionIndex]: true,
+      }));
+    } else if (option !== correctAnswer && scoreUpdatedQuestions[currentQuestionIndex]) {
+      setScore((prevScore) => prevScore - 10);
+      setScoreUpdatedQuestions((prev) => ({
+        ...prev,
+        [currentQuestionIndex]: false,
+      }));
     }
 
     if (currentQuestionIndex + 1 < questions.length) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setSelectedOption(null);
     }
   };
 
   const handleBack = () => {
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
-      setSelectedOption(null);
     }
   };
 
+  const handleSubmit = async () => {
+    let finalScore = score;
 
-  const handleSubmit = () => {
-    if (selectedOption === questions[currentQuestionIndex].correctAnswer) {
-      setScore((prevScore) => prevScore + 10);
+    // Check if the last answered question was correct before submission
+    const lastSelectedOption = selectedOptions[currentQuestionIndex];
+    if (
+      lastSelectedOption === questions[currentQuestionIndex].correctAnswer &&
+      !scoreUpdatedQuestions[currentQuestionIndex]
+    ) {
+      finalScore += 10;
+      setScore(finalScore);
     }
 
-    localStorage.setItem("level1Score", score); // Save Level 1 score
+    try {
+      const email = localStorage.getItem("email");
+      if (!email) {
+        console.error("No email found in localStorage");
+        return;
+      }
+
+      const response = await fetch("http://localhost:5000/api/update-score", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          level1Score: finalScore, // ✅ Use `finalScore` to ensure the latest value is sent
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to update score");
+      }
+
+      console.log("Score updated successfully:", data);
+    } catch (error) {
+      console.error("Error updating score:", error);
+    }
+
     setIsSubmitted(true);
-    navigate("/level2", { state: { level1Score: score } });
+    navigate("/level2", { state: { level1Score: finalScore } });
   };
-
+  
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-5 bg-gray-100">
       <h2 className="mb-4 text-3xl font-bold text-gray-800">Level 1</h2>
       <p className="mb-2 text-lg font-semibold text-red-500">
-        Time Left: {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, "0")}
+        Time Left: {Math.floor(timeLeft / 60)}:
+        {String(timeLeft % 60).padStart(2, "0")}
       </p>
 
       {isSubmitted ? (
         <div className="text-center">
-          <h3 className="text-2xl font-semibold text-green-600">Your Score: {score}</h3>
-          <p className="text-lg text-gray-600">Wait for the timer to finish...</p>
+          <h3 className="text-2xl font-semibold text-green-600">
+            Your Score: {score}
+          </h3>
+          <p className="text-lg text-gray-600">
+            Wait for the timer to finish...
+          </p>
         </div>
       ) : (
         <>
@@ -86,7 +156,9 @@ const Level1 = () => {
                 <div
                   key={index}
                   className={`p-3 border-2 rounded-lg text-center font-semibold cursor-pointer transition ${
-                    selectedOption === option ? "bg-blue-500 text-white border-blue-500" : "bg-gray-200 hover:bg-gray-300"
+                    selectedOptions[currentQuestionIndex] === option
+                      ? "bg-blue-500 text-white border-blue-500"
+                      : "bg-gray-200 hover:bg-gray-300"
                   }`}
                   onClick={() => handleOptionClick(option)}
                 >
@@ -96,7 +168,7 @@ const Level1 = () => {
             </div>
 
             <div className="flex justify-between mt-6">
-            <button
+              <button
                 onClick={handleBack}
                 className={`px-6 py-2 rounded-lg font-semibold transition ${
                   currentQuestionIndex > 0
