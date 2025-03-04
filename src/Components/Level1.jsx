@@ -128,12 +128,23 @@ const Level1 = () => {
   };
   
   return (
+    <div>
+      <div className="relative w-full">
+  <div className="absolute text-lg font-semibold text-red-500 right-6">
+    Time Left: {Math.floor(timeLeft / 60)}:
+    {String(timeLeft % 60).padStart(2, "0")}
+  </div>
+
+    </div>
     <div className="flex flex-col items-center justify-center min-h-screen p-5 bg-gray-100">
+     
+     
+
       <h2 className="mb-4 text-3xl font-bold text-gray-800">Level 1</h2>
-      <p className="mb-2 text-lg font-semibold text-red-500">
+      {/* <p className="mb-2 text-lg font-semibold text-red-500">
         Time Left: {Math.floor(timeLeft / 60)}:
         {String(timeLeft % 60).padStart(2, "0")}
-      </p>
+      </p> */}
 
       {isSubmitted ? (
         <div className="text-center">
@@ -179,6 +190,9 @@ const Level1 = () => {
               >
                 Back
               </button>
+
+              
+
               {currentQuestionIndex + 1 < questions.length ? (
                 <button
                   onClick={handleNext}
@@ -198,7 +212,7 @@ const Level1 = () => {
           </div>
         </>
       )}
-    </div>
+    </div></div>
   );
 };
 
