@@ -121,7 +121,38 @@ const Level3 = () => {
     if (email) fetchScore(); // Only fetch if email is available
   }, [email]);
 
-
+  const handleCodeChange = async (newCode) => {
+    setCode(newCode); // Update local state
+  
+    const email = localStorage.getItem("email"); // Fetch email from local storage
+    if (!email) {
+      console.error("No email found in local storage.");
+      return;
+    }
+  
+    try {
+      const response = await fetch("http://localhost:5000/updateCode", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          submittedCode: newCode,
+        }),
+      });
+  
+      const result = await response.json();
+      if (response.ok) {
+        console.log("Code updated successfully", result);
+      } else {
+        console.error("Error updating code:", result.message);
+      }
+    } catch (error) {
+      console.error("Failed to update code:", error);
+    }
+  };
+  
   return (
     <div className="min-h-screen p-4 text-white bg-gray-800">
       <header className="mb-4">
@@ -144,12 +175,13 @@ const Level3 = () => {
 
       {selectedTab === "editor" && (
         <div>
-          <textarea
-            className="w-full h-64 p-2 text-black rounded"
-            placeholder="Write your C code here..."
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-          />
+         <textarea
+  className="w-full h-64 p-2 text-black rounded"
+  placeholder="Write your C code here..."
+  value={code}
+  onChange={(e) => handleCodeChange(e.target.value)}
+/>
+
           <label className="block mt-2">
             Compile with Input:
             <input type="checkbox" checked={compileWithInput} onChange={(e) => setCompileWithInput(e.target.checked)} className="ml-2" />
