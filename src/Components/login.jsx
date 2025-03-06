@@ -37,8 +37,15 @@ const LoginPage = () => {
   
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gradient-to-r from-blue-400 to-purple-600">
-      <div className="p-8 bg-white rounded-lg shadow-md w-96">
+    <div className="relative flex items-center justify-center h-screen overflow-hidden bg-black">
+      {/* Animated Background */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute w-[200%] h-[200%] bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 animate-wave opacity-50" />
+        <div className="absolute w-[180%] h-[180%] bg-gradient-to-r from-purple-500 via-pink-600 to-blue-500 animate-wave-reverse opacity-40" />
+      </div>
+      
+      {/* Login Form */}
+      <div className="relative z-10 p-8 bg-white rounded-lg shadow-md w-96 backdrop-blur-md">
         <h2 className="mb-4 text-2xl font-semibold text-center text-gray-700">
           Login
         </h2>
@@ -73,4 +80,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-

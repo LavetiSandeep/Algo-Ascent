@@ -128,92 +128,107 @@ const Level1 = () => {
   };
   
   return (
-    <div>
-      <div className="relative w-full">
-  <div className="absolute text-lg font-semibold text-red-500 right-6">
-    Time Left: {Math.floor(timeLeft / 60)}:
-    {String(timeLeft % 60).padStart(2, "0")}
-  </div>
+    <div
+      className="relative flex flex-col items-center justify-center h-screen p-5 overflow-hidden"
+      style={{
+        backgroundImage: "url('/lv1.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "right center",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
+      }}
+    >
 
-    </div>
-    <div className="flex flex-col items-center justify-center min-h-screen p-5 bg-gray-100">
-     
-     
+<div className="text-center">
+        <h1 className="p-4 text-5xl font-extrabold text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text">
+          ALGO ASCENT
+        </h1></div>
 
-      <h2 className="mb-4 text-3xl font-bold text-gray-800">Level 1</h2>
-      {/* <p className="mb-2 text-lg font-semibold text-red-500">
-        Time Left: {Math.floor(timeLeft / 60)}:
-        {String(timeLeft % 60).padStart(2, "0")}
-      </p> */}
+      {/* Title Section */}
+      <div className="text-center">
+        <h2 className="mt-2 text-2xl font-bold text-transparent bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text">
+          Level 1
+        </h2>
+      </div>
 
-      {isSubmitted ? (
-        <div className="text-center">
-          <h3 className="text-2xl font-semibold text-green-600">
-            Your Score: {score}
-          </h3>
-          <p className="text-lg text-gray-600">
-            Wait for the timer to finish...
-          </p>
+      {/* Timer */}
+      <div className="absolute p-3 rounded-lg shadow-lg top-5 right-6 bg-white/10 backdrop-blur-md">
+        <p className="text-xl font-bold text-red-500">
+          Time Left: {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, "0")}
+        </p>
+      </div>
+
+      {/* Quiz Container */}
+      <div className="w-full max-w-3xl min-h-[250px] p-8 bg-white/10 backdrop-blur-lg 
+                      rounded-lg shadow-2xl border-[3px] border-blue-400/50 
+                      hover:border-blue-400 shadow-blue-500 transition-all mt-5">
+        <div className="flex justify-between items-center mb-3 text-[#39ff14] text-lg font-semibold">
+          <span>QUESTION: {currentQuestionIndex + 1}/{questions.length}</span>
+          <span>Marks: 10</span>
         </div>
-      ) : (
-        <>
-          <div className="w-full max-w-lg p-6 bg-white rounded-lg shadow-xl">
-            <h3 className="mb-4 text-xl font-semibold text-gray-700">
-              {questions[currentQuestionIndex].question}
-            </h3>
 
-            <div className="grid grid-cols-2 gap-4">
-              {questions[currentQuestionIndex].options.map((option, index) => (
-                <div
-                  key={index}
-                  className={`p-3 border-2 rounded-lg text-center font-semibold cursor-pointer transition ${
-                    selectedOptions[currentQuestionIndex] === option
-                      ? "bg-blue-500 text-white border-blue-500"
-                      : "bg-gray-200 hover:bg-gray-300"
-                  }`}
-                  onClick={() => handleOptionClick(option)}
-                >
-                  {option}
-                </div>
-              ))}
+        <h3 className="mb-4 text-lg font-semibold text-center text-white">
+          {questions[currentQuestionIndex].question}
+        </h3>
+
+        <div className="grid grid-cols-2 gap-3">
+          {questions[currentQuestionIndex].options.map((option, index) => (
+            <div
+              key={index}
+              className={`p-3 border-2 rounded-lg text-center font-semibold cursor-pointer transition ${
+                selectedOptions[currentQuestionIndex] === option
+                  ? "bg-blue-500 text-white border-blue-500"
+                  : "bg-gray-200 hover:bg-gray-300"
+              }`}
+              onClick={() => handleOptionClick(option)}
+            >
+              {option}
             </div>
+          ))}
+        </div>
 
-            <div className="flex justify-between mt-6">
-              <button
-                onClick={handleBack}
-                className={`px-6 py-2 rounded-lg font-semibold transition ${
-                  currentQuestionIndex > 0
-                    ? "bg-yellow-500 text-white hover:bg-yellow-600"
-                    : "bg-gray-300 text-gray-700 cursor-not-allowed"
-                }`}
-                disabled={currentQuestionIndex === 0}
-              >
-                Back
-              </button>
+        <div className="flex justify-between mt-4">
+          <button
+            onClick={handleBack}
+            className={`px-5 py-2 rounded-lg font-semibold transition ${
+              currentQuestionIndex > 0
+                ? "bg-yellow-500 text-white hover:bg-yellow-600"
+                : "bg-gray-300 text-gray-700 cursor-not-allowed"
+            }`}
+            disabled={currentQuestionIndex === 0}
+          >
+            Back
+          </button>
 
-              
+          {currentQuestionIndex + 1 < questions.length ? (
+            <button
+              onClick={handleNext}
+              className="px-5 py-2 font-semibold text-white transition bg-green-500 rounded-lg hover:bg-green-600"
+            >
+              Next
+            </button>
+          ) : (
+            <button
+              onClick={handleSubmit}
+              className="px-5 py-2 font-semibold text-white transition bg-red-500 rounded-lg hover:bg-red-600"
+            >
+              Submit
+            </button>
+          )}
+        </div>
+      </div>
 
-              {currentQuestionIndex + 1 < questions.length ? (
-                <button
-                  onClick={handleNext}
-                  className="px-6 py-2 font-semibold text-white transition bg-green-500 rounded-lg hover:bg-green-600"
-                >
-                  Next
-                </button>
-              ) : (
-                <button
-                  onClick={handleSubmit}
-                  className="px-6 py-2 font-semibold text-white transition bg-red-500 rounded-lg hover:bg-red-600"
-                >
-                  Submit
-                </button>
-              )}
-            </div>
-          </div>
-        </>
+      {/* Score Section */}
+      {isSubmitted && (
+        <div className="absolute p-3 text-center rounded-lg shadow-lg bottom-10 bg-white/10 backdrop-blur-md">
+          <h3 className="text-xl font-semibold text-green-600">Your Score: {score}</h3>
+          <p className="text-gray-300 text-md">Wait for the timer to finish...</p>
+        </div>
       )}
-    </div></div>
+    </div>
+    
   );
+
 };
 
 export default Level1;

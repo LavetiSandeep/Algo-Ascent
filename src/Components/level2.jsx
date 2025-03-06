@@ -98,11 +98,7 @@ const Level2 = () => {
   const finalScore = level1Score + updatedScore;
 
   setSubmitted(true);
-    // try {
-    //   await axios.post("http://localhost:5000/api/submit", { answers, score: finalScore });
-    // } catch (error) {
-    //   console.error("Error submitting answers:", error);
-    // }
+    
 
     localStorage.setItem("finalScore", finalScore);
     navigate("/score", { state: { level1Score, level2Score: score, finalScore } });
@@ -110,59 +106,96 @@ const Level2 = () => {
 
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 text-white bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-      {questions.length > 0 ? (
-        <>
-          <div className="w-full max-w-2xl p-6 bg-gray-800 rounded-lg shadow-lg">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-xl font-semibold">
-                Question {currentQuestion + 1} / {questions.length}
-              </span>
-              <span className="text-lg font-bold text-red-400">
-                ⏳ {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, "0")}
-              </span>
-            </div>
-            <h3 className="text-lg text-yellow-300">Marks: {questions[currentQuestion].marks}</h3>
-            <div className="mt-4">
-              <h2 className="text-xl font-semibold text-white">{questions[currentQuestion]?.text}</h2>
-              <textarea
-                className="w-full p-2 mt-2 text-black bg-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-                rows="4"
-                placeholder="Type your answer here..."
-                value={answers[currentQuestion] || ""}
-                onChange={handleAnswerChange}
-              ></textarea>
-            </div>
-            <div className="flex justify-between mt-4">
-              <button 
-                className="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 disabled:opacity-50"
-                onClick={handlePrevious}
-                disabled={currentQuestion === 0}
-              >⬅ Previous</button>
-              {currentQuestion < questions.length - 1 ? (
+
+    
+      <div 
+      className="relative flex flex-col items-center justify-center min-h-screen p-4 text-white bg-center bg-no-repeat bg-cover"
+      style={{ backgroundImage: "url('./public/lvl2.jpg')" }}  // Add your image path here
+    >
+        
+  
+    
+    {/* ALGO ASCENT - Centered at the Top */}
+    <h1 className="absolute text-5xl font-bold text-transparent transform -translate-x-1/2 top-6 left-1/2 bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+      ALGO ASCENT
+    </h1>
+
+    {/* LEVEL-2 - Positioned Closer Beneath */}
+    <h2 className="mt-1 text-3xl font-semibold text-yellow-300">
+      LEVEL-2
+    </h2>
+        {/* Timer (Top Right) */}
+        <div className="absolute text-3xl font-bold text-red-400 top-4 right-6">
+          ⏳ {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, "0")}
+        </div>
+    
+        {questions.length > 0 ? (
+          <>
+            {/* Question Container */}
+            <div className="w-full max-w-5xl p-8 bg-white/10 backdrop-blur-lg rounded-lg shadow-2xl 
+                border-[3px] border-pink-400/50 hover:border-pink-400 shadow-pink-500 transition-all">
+
+              
+              {/* Question Number & Marks */}
+              <div className="flex items-center justify-between mb-6">
+  <span className="text-2xl font-semibold text-cyan-400 drop-shadow-lg">
+    Question {currentQuestion + 1} / {questions.length}
+  </span>
+  <h3 className="text-xl transition-all text-cyan-300 drop-shadow-lg hover:text-cyan-200">
+    Marks: {questions[currentQuestion].marks}
+  </h3>
+</div>
+
+    
+              {/* Question and Answer Side-by-Side */}
+              <div className="flex items-start gap-8">
+                {/* Question Text (Left Side) */}
+                <h2 className="w-1/2 text-2xl font-semibold text-white">
+                  {questions[currentQuestion]?.text}
+                </h2>
+    
+                {/* Answer Input (Right Side) */}
+                <textarea
+                  className="flex-grow w-1/2 p-4 text-black bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  rows="5"
+                  placeholder="Type your answer here..."
+                  value={answers[currentQuestion] || ""}
+                  onChange={handleAnswerChange}
+                ></textarea>
+              </div>
+    
+              {/* Navigation Buttons */}
+              <div className="flex justify-between mt-6">
                 <button 
-                  className="px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700"
-                  onClick={handleNext}
-                >Next ➡</button>
-              ) : (
-                <button 
-                  className="px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700"
-                  onClick={handleSubmit}
-                >Submit ✅</button>
-              )}
+                  className="px-6 py-3 text-xl text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50"
+                  onClick={handlePrevious}
+                  disabled={currentQuestion === 0}
+                >
+                  ⬅ Previous
+                </button>
+                {currentQuestion < questions.length - 1 ? (
+                  <button 
+                    className="px-6 py-3 text-xl text-white bg-green-600 rounded-lg hover:bg-green-700"
+                    onClick={handleNext}
+                  >
+                    Next ➡
+                  </button>
+                ) : (
+                  <button 
+                    className="px-6 py-3 text-xl text-white bg-red-600 rounded-lg hover:bg-red-700"
+                    onClick={handleSubmit}
+                  >
+                    Submit ✅
+                  </button>
+                )}
+              </div>
             </div>
-          </div>
-          {submitted && (
-            <div className="mt-6 text-2xl font-bold text-green-400">
-              Your Score: {score} / 35
-            </div>
-          )}
-        </>
-      ) : (
-        <p className="text-gray-300">Loading questions...</p>
-      )}
-    </div>
-  );
+          </>
+        ) : (
+          <p className="text-2xl text-gray-300">Loading questions...</p>
+        )}
+      </div>
+    );
 };
 
 export default Level2;
