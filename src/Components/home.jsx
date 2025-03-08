@@ -133,7 +133,7 @@ const HomePage = () => {
     <div 
       className="flex flex-col items-center justify-center min-h-screen p-5 bg-gray-100"
       style={{
-        backgroundImage: "url('./public/homebackpage.jpg')",
+        backgroundImage: "url('/homebackpage.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "right center",
         backgroundRepeat: "no-repeat",
