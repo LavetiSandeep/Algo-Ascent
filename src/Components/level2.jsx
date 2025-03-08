@@ -85,7 +85,7 @@ const Level2 = () => {
     return;
   }
   try {
-    const response = await axios.post("http://localhost:5000/api/update-level2score", {
+    const response = await axios.post("https://backend-jofi.onrender.com/api/update-level2score", {
       email,
       level2Score: updatedScore,
     });

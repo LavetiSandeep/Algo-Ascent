@@ -200,7 +200,7 @@ const Level1 = () => {
         return;
       }
 
-      const response = await fetch("http://localhost:5000/api/update-score", {
+      const response = await fetch("https://backend-jofi.onrender.com/api/update-score", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

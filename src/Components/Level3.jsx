@@ -26,7 +26,7 @@ const Level3 = () => {
   const handleCompile = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/compilecode", {
+      const response = await fetch("https://backend-jofi.onrender.com/compilecode", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -51,7 +51,7 @@ const Level3 = () => {
     try {
       const email = localStorage.getItem("email"); // Retrieve email from session storage
     
-      const response = await fetch("http://localhost:5000/submitcode", {
+      const response = await fetch("https://backend-jofi.onrender.com/submitcode", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -95,7 +95,7 @@ const Level3 = () => {
   useEffect(() => {
     const fetchScore = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/getLevel3Score?email=${email}`, {
+        const response = await fetch(`https://backend-jofi.onrender.com/getLevel3Score?email=${email}`, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -131,7 +131,7 @@ const Level3 = () => {
     }
   
     try {
-      const response = await fetch("http://localhost:5000/updateCode", {
+      const response = await fetch("https://backend-jofi.onrender.com/updateCode", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
