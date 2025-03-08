@@ -110,7 +110,7 @@ const Level2 = () => {
     
       <div 
       className="relative flex flex-col items-center justify-center min-h-screen p-4 text-white bg-center bg-no-repeat bg-cover"
-      style={{ backgroundImage: "url('./public/lvl2.jpg')" }}  // Add your image path here
+      style={{ backgroundImage: "url('/lvl2.jpg')" }}  // Add your image path here
     >
         
   
