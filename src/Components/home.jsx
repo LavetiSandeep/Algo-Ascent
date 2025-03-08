@@ -103,23 +103,42 @@ const HomePage = () => {
         
         
         {/*sandeep*/}
-        <div className="flex items-center w-64 p-4 space-x-4 bg-gray-100 rounded-lg shadow-md">
+        <div className="flex items-center w-64 p-4 space-x-4 rounded-lg shadow-md">
   {/* Passport-size Image */}
   <img 
     src="/sandeep.jpg"  // Replace with actual image path
     alt="Coordinator" 
-    className="object-cover border-2 border-gray-300 rounded-full w-18 h-18"
+    className="object-cover bg-transparent rounded-full w-18 h-18"
   />
-
-  {/* Coordinator Details */}
-  <div>
-    <h3 className="text-lg font-semibold text-gray-800">Sandeep</h3>
-    <p className="text-sm text-gray-600">Event Coordinator</p>
-  </div>
 </div>
 
-      
+        sandeep<br/><br/>
+
+        {/*kalyani */}
+
+        <div className="flex items-center w-64 p-4 space-x-4 rounded-lg shadow-md">
+  {/* Passport-size Image */}
+  <img 
+    src="/sandeep.jpg"  // Replace with actual image path
+    alt="Coordinator" 
+    className="object-cover bg-transparent rounded-full w-18 h-18"
+  />
+</div>
+
         M. Kalyani<br /><br />
+
+      {/*jyoshika*/}
+        <div className="flex items-center w-64 p-4 space-x-4 rounded-lg shadow-md">
+  {/* Passport-size Image */}
+  <img 
+    src="/sandeep.jpg"  // Replace with actual image path
+    alt="Coordinator" 
+    className="object-cover bg-transparent rounded-full w-18 h-18"
+  />
+</div>
+
+
+
         B. Jyoshika<br />
       </div>
     ),
