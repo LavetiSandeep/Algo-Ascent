@@ -43,7 +43,7 @@ const ScorePage = () => {
   const { level1Score, level2Score, finalScore } = scores;
 
   // Define totalPossibleScore (assuming Level 2 max is 35) and compute required score for Level 3
-  const totalPossibleScore = 50 + 35; 
+  const totalPossibleScore = 150 + 60; 
   const requiredScoreForLevel3 = (2 / 3) * totalPossibleScore; // 2/3 of total score
 
   if (loading) return <p>Loading scores...</p>;
