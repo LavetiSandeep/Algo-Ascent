@@ -9,6 +9,8 @@ const Level1 = () => {
   const [timeLeft, setTimeLeft] = useState(60); // 20 minutes countdown
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [scoreUpdatedQuestions, setScoreUpdatedQuestions] = useState({});
+  const [isManual, setIsManual] = useState(false);
+
 
   const questions = [
     {
@@ -29,24 +31,24 @@ const Level1 = () => {
 
 
     {
-      question: "Which of the following cannot be a variable name in C?",
-      options: ["volatile", "true", "friend", "export"],
-      correctAnswer: "volatile",
+      question: "what happens if free() is called on a NULL pointer?",
+      options: ["segmentation fault", "undefined behavior", "it does nothing", "it resets the pointer to 0"],
+      correctAnswer: "it does nothing",
     },
     {
-      question: "#include <stdio.h> \n int main() { \n char ch = 'A' + 2; \n printf(\"%c\", ch); \n return 0; \n }",
-      options: ["A", "B", "C", "D"],
-      correctAnswer: "C",
+      question: "",
+      options: ["", "", "", ""],
+      correctAnswer: "",
     },    
     {
-      question: "Which type of software acts as an interface between hardware and user applications?",
-      options: ["Application Software", "System Software", "Firmware", "Middleware"],
-      correctAnswer: "System Software",
+      question: "Which data structure is best suited for implementing recursion?",
+      options: ["Queue", "Stack", "Array", "Graph"],
+      correctAnswer: "Stack",
     },
     {
-      question: "Which number system is used in IP addressing?",
-      options: ["Decimal", "Binary", "Octal", "Hexadecimal"],
-      correctAnswer: "Binary",
+      question: "which of the following devices can function as both an input and output ?",
+      options: ["Monitor", "Printer", "Touchscreen", "Keyboard"],
+      correctAnswer: "Touchscreen",
     },
     {
       question: "What will be the output of sizeof(5.0) in C?",
@@ -54,60 +56,79 @@ const Level1 = () => {
       correctAnswer: "8",
     },
     {
-      question: "int x = 2; x = x << 2; printf(\"%d\", x);",
-      options: ["4", "8", "16", "2"],
-      correctAnswer: "8",
+      question: "Which type of RAM retains data even when power is turned off?",
+      options: ["DRAM", "SRAM", "ROM", "Both DRAM and SRAM"],
+      correctAnswer: "ROM",
     },   
     {
-      question: "Which language is mainly used for Android development?",
-      options: ["Java", "Python", "C#", "Swift"],
-      correctAnswer: "Java",
+      question: "Which of the following is the correct way to initialize an array?",
+      options: ["int arr[] = {1, 2, 3, 4};", "int arr(4) = {1, 2, 3, 4};", "int arr = {1, 2, 3, 4};", "int arr[] = (1, 2, 3, 4);"],
+      correctAnswer: "int arr[] = {1, 2, 3, 4};",
     },
     {
-      question: "What is the time complexity of binary search?",
-      options: ["O(n)", "O(log n)", "O(n log n)", "O(1)"],
-      correctAnswer: "O(log n)",
+      question: "What will be the output of printf(\"%d\", 'A'); in C?",
+      options: ["A", "65", "Compilation Error", "Garbage Value"],
+      correctAnswer: "65",
     },
     {
-      question: "Which of the following is not possible statically in C language?",
-      options: ["Jagged Array", "Rectangular Array", "Cuboidal Array", "Multidimensional Array"],
-      correctAnswer: "Jagged Array",
+      question: "Which type of memory is directly accessed by a CPU for imediate processing?",
+      options: ["HDD", "RAM", "Cache", "SSD"],
+      correctAnswer: "Cache",
     },
     {
-      question: "",
-      options: ["O(n)", "O(log n)", "O(n log n)", "O(1)"],
-      correctAnswer: "O(log n)",
+      question: "What is the full form of URL?",
+      options: ["Uniform Resource Link", "Unified Reference Locator", "Uniform Resource Locator", "Universal Resource Link"],
+      correctAnswer: "Uniform Resource Locator",
     },
     {
-      question: "What is the time complexity of binary search?",
-      options: ["O(n)", "O(log n)", "O(n log n)", "O(1)"],
-      correctAnswer: "O(log n)",
+    question: "which storagedevice is used for long-term data storage?",
+      options: ["Ram", "Hard Drive", "Cache", "Register"],
+      correctAnswer: "Hard Drive",
     },
     {
-      question: "What is the time complexity of binary search?",
-      options: ["O(n)", "O(log n)", "O(n log n)", "O(1)"],
-      correctAnswer: "O(log n)",
+      question: "Which function is used to take input in C?",
+        options: ["input()", "scanf()", "get()", "cin"],
+        correctAnswer: "scanf()",
+    },
+    {
+      question: "Which header file is needed for memory allocation functions like malloc() and free()?",
+      options: [" stdio.h", "stdlib.h", "memory.h", " conio.h"],
+      correctAnswer: "stdlib.h",
     },
   ];
 
 ///this will has to be update
 
-
-
-
   // Added useEffect to implement the countdown timer.
   // It decreases 'timeLeft' every second and auto-submits when time runs out.
   useEffect(() => {
-    if (!isSubmitted && timeLeft > 0) {
-      const timer = setInterval(() => {
-        setTimeLeft((prevTime) => prevTime - 1);
-      }, 1000);
-      return () => clearInterval(timer);
-    } else if (timeLeft === 0) {
-      // Auto-submit when timer reaches zero.
-      handleSubmit();
+    const quizDuration = 10 * 60 * 1000 ; // 20 minutes in milliseconds
+    let startTime = localStorage.getItem("quizstartTime");
+  
+    if (!startTime) {
+      startTime = Date.now();
+      localStorage.setItem("quizStartTime", startTime);
     }
-  }, [timeLeft, isSubmitted]);
+  
+    const updateTimer = () => {
+      const startTime = new Date("2025/03/09 21:35:00");
+      const elapsedTime = Date.now() - startTime;
+      const newTimeLeft = Math.max(Math.floor((quizDuration - elapsedTime) / 1000), 0);
+
+  
+      setTimeLeft(newTimeLeft);
+  
+      if (newTimeLeft === 0) {
+        handleSubmit(false); // Auto-submit when timer reaches 0
+      }
+    };
+  
+    updateTimer(); // Initial update
+    const timerInterval = setInterval(updateTimer, 1000);
+  
+    return () => clearInterval(timerInterval);
+  }, []);
+  
 
   
 
@@ -166,19 +187,9 @@ const Level1 = () => {
   localStorage.setItem("level1Submitted", "true");
 
   // Delay navigation to Level2 by 5 seconds, and replace history so user cannot go back
-  setTimeout(() => {
-    navigate("/level2", { state: { level1Score: finalScore }, replace: true });
-  }, 1000);
-
-
-  // useEffect(() => {
-  //   // If level1 has been submitted, automatically redirect to level2
-  //   const submitted = localStorage.getItem("level1Submitted");
-  //   if (submitted === "true") {
-  //     navigate("/level2", { replace: true });
-  //   }
-  // }, [navigate]);
-
+  // setTimeout(() => {
+  //   navigate("/level2", { state: { level1Score: finalScore }, replace: true });
+  // }, 1000);
 
 
     // Check if the last answered question was correct before submission
@@ -221,8 +232,23 @@ const Level1 = () => {
 
     setIsSubmitted(true);
     localStorage.setItem("level1Submitted", "true"); // <-- Persist submission state
+
+    // TO SAVE SCORE IN LOCALSTORAGE
+    localStorage.setItem("finalscore", finalScore);
     
-    navigate("/level2", { state: { level1Score: finalScore } });
+    //navigate("/level2", { state: { level1Score: finalScore } });
+    
+     // 🟢 **If user submitted before time, go to waiting page first**
+  if (isManual) {
+    navigate("/waitingpg1", { state: { level1Score: finalScore } });
+    setTimeout(() => {
+      navigate("/level2", { state: { level1Score: finalScore }, replace: true });
+    }, 5000); // 5-second delay before going to Level 2
+  } else {
+    navigate("/level2", { state: { level1Score: finalScore }, replace: true });
+  }
+ 
+ 
   };
   
   return (
@@ -252,7 +278,7 @@ const Level1 = () => {
       {/* Timer */}
       <div className="absolute p-3 rounded-lg shadow-lg top-5 right-6 bg-white/10 backdrop-blur-md">
         <p className="text-xl font-bold text-red-500">
-          Time Left: {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, "0")}
+          Time Left: {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, "0")} 
         </p>
       </div>
 
@@ -306,25 +332,27 @@ const Level1 = () => {
               Next
             </button>
           ) : (
-            <button
-              onClick={handleSubmit}
 
-              disabled={isSubmitted} // <-- New attribute added to disable button after first submission
-              className="px-5 py-2 font-semibold text-white transition bg-red-500 rounded-lg hover:bg-red-600"
-            >
-              Submit
-            </button>
+            // change this
+            <button
+  onClick={ () => {handleSubmit(true);
+    setIsManual(true);
+    navigate("/waitingpg1");
+
+  } }// Pass `true` to indicate manual submission
+  disabled={isSubmitted || timeLeft === 0} // Prevents multiple submissions
+  className={`px-5 py-2 font-semibold text-white transition bg-red-500 rounded-lg hover:bg-red-600 ${
+    isSubmitted ? "opacity-50 cursor-not-allowed" : ""
+  }`}
+>
+  Submit
+</button>
+
           )}
         </div>
       </div>
 
-      {/* Score Section
-      {isSubmitted && (
-        <div className="absolute p-3 text-center rounded-lg shadow-lg bottom-10 bg-white/10 backdrop-blur-md">
-          <h3 className="text-xl font-semibold text-green-600">Your Score: {score}</h3>
-          <p className="text-gray-300 text-md">Wait for the timer to finish...</p>
-        </div>
-      )} */}
+      
     </div>
     
   );

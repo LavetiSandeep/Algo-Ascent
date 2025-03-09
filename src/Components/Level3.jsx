@@ -11,6 +11,8 @@ const Level3 = () => {
   const [loading, setLoading] = useState(false);
   const [pass, setPass] = useState(0);
   const [fail, setFail] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(20 * 60); // 20 minutes in seconds
+
  
   
 
@@ -44,6 +46,24 @@ const Level3 = () => {
     }
     setLoading(false);
   };
+
+
+/*timer*/
+  useEffect(() => {
+    const startTime = new Date("2025/03/09 18:25:00").getTime();
+    
+    const updateTimer = () => {
+      const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+      const remainingTime = Math.max(20 * 60 - elapsedTime, 0);
+      setTimeLeft(remainingTime);
+    };
+  
+    updateTimer(); // Initial call to sync immediately
+    const timerInterval = setInterval(updateTimer, 1000);
+  
+    return () => clearInterval(timerInterval); // Cleanup interval on unmount
+  }, []);
+  
 
   // Submit Code (Check Test Cases)
   const handleSubmitCode = async () => {
@@ -235,6 +255,10 @@ const Level3 = () => {
     })}
   </div>
 )}
+
+<div className="absolute top-4 right-4 text-xl font-bold text-red-500">
+  {timeLeft > 0 ? `${Math.floor(timeLeft / 60)}:${String(timeLeft % 60).padStart(2, '0')}` : "Time's up!"}
+</div>
 
 
       {selectedTab === "result" && (

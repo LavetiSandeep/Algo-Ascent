@@ -9,7 +9,7 @@ const Level2 = () => {
   const [score, setScore] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [answeredCorrectly, setAnsweredCorrectly] = useState({}); // ✅ Track answered questions
-  const [timeLeft, setTimeLeft] = useState(200);
+  const [timeLeft, setTimeLeft] = useState();
   const navigate = useNavigate();
   const level1Score = parseInt(localStorage.getItem("level1Score")) || 0;
 
@@ -25,15 +25,36 @@ const Level2 = () => {
   }, []);
 
   useEffect(() => {
-    if (timeLeft > 0) {
-      const timer = setInterval(() => {
-        setTimeLeft((prev) => prev - 1);
-      }, 1000);
-      return () => clearInterval(timer);
-    } else {
-      handleSubmit();
+    const quizDuration = 20 * 60 * 1000 ; // 20 minutes in milliseconds
+    let startTime = localStorage.getItem("startTime");
+  
+    if (!startTime) {
+      startTime = Date.now();
+      localStorage.setItem("quizStartTime", startTime);
     }
-  }, [timeLeft]);
+  
+    const updateTimer = () => {
+      const startTime = new Date("2025/03/09 21:45:00");
+      const elapsedTime = Date.now() - startTime;
+      
+      const newTimeLeft = Math.max(Math.floor((quizDuration - elapsedTime) / 1000), 0);
+
+      const minutes = Math.floor(newTimeLeft / 60);
+const seconds = newTimeLeft % 60;
+  
+      setTimeLeft(newTimeLeft);
+  
+      if (newTimeLeft === 0) {
+        handleSubmit(); // Auto-submit when timer reaches 0
+      }
+    };
+  
+    updateTimer(); // Initial update
+    const timerInterval = setInterval(updateTimer, 1000);
+  
+    return () => clearInterval(timerInterval);
+  }, []);
+  
 
   const handleAnswerChange = (e) => {
     setAnswers({ ...answers, [currentQuestion]: e.target.value });

@@ -6,8 +6,8 @@ import Leaderboard from "./Components/Leaderboard";
 import Level2 from "./Components/level2";
 import Score from "./Components/score";
 import Level3 from "./Components/Level3.jsx";
+import WaitingPage from "./Components/waitingpg1.jsx";
 
-//Jyoshika
 function App() {
   return (
     <Router>
@@ -15,6 +15,7 @@ function App() {
         <Route path="/" element={<LoginPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/Level1" element={<Level1 />} />
+        <Route path="/waitingpg1" element={<WaitingPage />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/level2" element={<Level2 />} />
        <Route path="/score" element={<Score />} />
