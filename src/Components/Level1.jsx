@@ -6,7 +6,7 @@ const Level1 = () => {
   const [score, setScore] = useState(0); // Start fresh
   const [selectedOptions, setSelectedOptions] = useState({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(20); // 20 minutes countdown
+  const [timeLeft, setTimeLeft] = useState(60); // 20 minutes countdown
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [scoreUpdatedQuestions, setScoreUpdatedQuestions] = useState({});
 
@@ -168,18 +168,16 @@ const Level1 = () => {
   // Delay navigation to Level2 by 5 seconds, and replace history so user cannot go back
   setTimeout(() => {
     navigate("/level2", { state: { level1Score: finalScore }, replace: true });
-  }, 5000);
+  }, 1000);
 
 
-
-
-  useEffect(() => {
-    // If level1 has been submitted, automatically redirect to level2
-    const submitted = localStorage.getItem("level1Submitted");
-    if (submitted === "true") {
-      navigate("/level2", { replace: true });
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   // If level1 has been submitted, automatically redirect to level2
+  //   const submitted = localStorage.getItem("level1Submitted");
+  //   if (submitted === "true") {
+  //     navigate("/level2", { replace: true });
+  //   }
+  // }, [navigate]);
 
 
 

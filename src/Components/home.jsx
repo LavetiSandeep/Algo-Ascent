@@ -71,16 +71,16 @@ const HomePage = () => {
   const content = {
     About: (
       <div className="text-lg">
-        Algo Ascent is a three-stage technical challenge designed for CSE students to test their theoretical knowledge, problem-solving abilities, and coding skills.
+        Algo Ascent is a three-stage technical challenge designed for  students to test their theoretical knowledge, problem-solving abilities, and coding skills.
         <br /><br />
         <strong>Level 1 – Theoretical Traverse (15 Questions):</strong> <br />
-        A fundamental round featuring 15 theory-based questions on algorithms, data structures, and computer science concepts. No eliminations—everyone qualifies for the next level.
+        A fundamental round featuring 15 theory-based questions on basic c programming, data structures, and computer science concepts. No eliminations—everyone qualifies for the next level.
         <br /><br />
-        <strong>Level 2 – Algo Arena (15 Questions):</strong> <br />
-        A challenging round with 6 problem-solving questions that require analytical thinking and coding skills. Only top scorers qualify for the final round.
+        <strong>Level 2 – Algo Arena (6 Questions):</strong> <br />
+        A challenging round with 6 problem-solving questions that require analytical thinking and coding skills. Only top scorers of level1 + level2 scores qualify for the final round.
         <br /><br />
         <strong>Level 3 – Code Conqueror (Final Problem):</strong> <br />
-        A high-stakes final coding challenge. The first participant to crack the final problem wins the competition.
+        A high-stakes final coding challenge. The  participant with highest score in the final problem wins the competition.
       </div>
     ),
     Instructions: (
@@ -95,7 +95,11 @@ const HomePage = () => {
         <br /><br />
         <strong>4 -</strong> Usage of mobile phones is prohibited during the Event.
         <br /><br />
-        <strong>5 -</strong> Finally, the top scorer will receive the prize, and the participants are honored with participation certificates.
+      
+        <strong>5 -</strong> In case of tie-breaker situation time of submission will be considered to decide the winner.
+     <br /><br />
+        <strong>6 -</strong> Finally, the top scorer will receive the prize, and the participants are honored with participation certificates.
+          
       </div>
     ),
     Cordinators: (

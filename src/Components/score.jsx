@@ -24,7 +24,7 @@ const ScorePage = () => {
     const fetchScores = async () => {
       try {
         // Send GET request with email as a query parameter
-        const response = await axios.get(`https://backend-jofi.onrender.com/api/get-scores?email=${email}`);
+        const response = await axios.get (`http://localhost:5000/api/get-scores?email=${email}`);
         const { level1Score, level2Score,finalScore } = response.data;
       
         // Update the state with the fetched scores and calculated final score

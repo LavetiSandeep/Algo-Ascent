@@ -6,7 +6,7 @@ const Leaderboard = () => {
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
-        const response = await fetch("https://backend-jofi.onrender.com/leaderboard");
+        const response = await fetch("http://localhost:5000/leaderboard");
         const data = await response.json();
 
         if (response.ok) {

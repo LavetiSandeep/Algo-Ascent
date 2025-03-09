@@ -14,7 +14,7 @@ const LoginPage = () => {
     setError(""); // Clear previous errors
   
     try {
-      const response = await fetch("https://backend-jofi.onrender.com/login", {
+      const response = await fetch("http://localhost:5000/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -124,7 +124,7 @@ LOGIN
   {error && <p className="text-sm text-red-500">{error}</p>}
   <button
     type="submit"
-    className="w-full p-3 text-white transition duration-300 bg-blue-500 rounded-md hover:bg-blue-600"
+    className="w-full p-3 text-white transition bg-blue-500 rounded-md duration-3 hover:bg-blue-600"
   >
     Login
   </button>
