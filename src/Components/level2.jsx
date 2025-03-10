@@ -183,7 +183,7 @@ int main()
     // }
 
     const updateTimer = () => {
-      const startTime = new Date("2025/03/11 01:54:00");
+      const startTime = new Date("2025/03/11 02:05:00");
       const elapsedTime = Date.now() - startTime;
 
       const newTimeLeft = Math.max(
@@ -287,7 +287,7 @@ int main()
   return (
     <div 
     className="relative flex flex-col items-center justify-center min-h-screen p-4 text-white bg-center bg-no-repeat bg-cover"
-    style={{ backgroundImage: "url('./public/lvl2.jpg')" }}  // Add your image path here
+    style={{ backgroundImage: "url('/public/lvl2.jpg')" }}  // Add your image path here
   >
       
 
