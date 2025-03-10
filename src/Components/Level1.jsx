@@ -202,6 +202,23 @@ const Level1 = () => {
       console.error("Error updating score:", error);
     }
 
+
+
+
+    // level 1 backend score request
+
+    fetch("https://backend-jofi.onrender.com/api/update-level1score", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: userEmail, level1Score: userScore }),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log("Level 1 score updated:", data))
+      .catch((error) => console.error("Error updating Level 1 score:", error));
+    
+
     setIsSubmitted(true);
     localStorage.setItem("level1Submitted", "true"); // <-- Persist submission state
 
@@ -231,7 +248,7 @@ const Level1 = () => {
     }
   
     const updateTimer = () => {
-      const startTime = new Date("2025/03/10 10:56:00");
+      const startTime = new Date("2025/03/10 16:06:00");
       const elapsedTime = Date.now() - startTime;
       const newTimeLeft = Math.max(Math.floor((quizDuration - elapsedTime) / 1000), 0);
       
