@@ -8,6 +8,7 @@ import Score from "./Components/score";
 import Level3 from "./Components/Level3.jsx";
 import WaitingPage from "./Components/waitingpg1.jsx";
 import WaitingPage2 from "./Components/waitingpg2.jsx";
+import EventWaiting from "./Components/EventWaiting.jsx"
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
         <Route path="/level2" element={<Level2 />} />
        <Route path="/score" element={<Score />} />
        <Route path="/Level3" element={<Level3 />} />
+       <Route path="/waiting" element={<EventWaiting />} />
+
 
       </Routes>
     </Router>

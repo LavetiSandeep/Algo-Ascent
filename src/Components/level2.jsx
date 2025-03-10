@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Level2 = () => {
   const [questions, setQuestions] = useState([]);
@@ -11,7 +12,8 @@ const Level2 = () => {
   const [answeredCorrectly, setAnsweredCorrectly] = useState({}); // ✅ Track answered questions
   const [timeLeft, setTimeLeft] = useState();
   const navigate = useNavigate();
-  const level1Score = parseInt(localStorage.getItem("level1Score")) || 0;
+  const location=useLocation();
+  const level1Score = location.state.level1Score;
 
   useEffect(() => {
     const customQuestions = [
@@ -163,16 +165,16 @@ int main()
   }, []);
 
   useEffect(() => {
-    const quizDuration = 1 * 60 * 1000; // 20 minutes in milliseconds
-    let startTime = localStorage.getItem("startTime");
+    const quizDuration = 20 * 60 * 1000; // 20 minutes in milliseconds
+    // let startTime = localStorage.getItem("startTime");
 
-    if (!startTime) {
-      startTime = Date.now();
-      localStorage.setItem("quizStartTime", startTime);
-    }
+    // if (!startTime) {
+    //   startTime = Date.now();
+    //   localStorage.setItem("quizStartTime", startTime);
+    // }
 
     const updateTimer = () => {
-      const startTime = new Date("2025/03/10 12:46:00");
+      const startTime = new Date("2025/03/10 16:41:00");
       const elapsedTime = Date.now() - startTime;
 
       const newTimeLeft = Math.max(
@@ -186,8 +188,9 @@ int main()
       setTimeLeft(newTimeLeft);
 
       if (newTimeLeft === 0) {
+        handleSubmit();
         navigate("/waitingpg2");
-        handleSubmit(); // Auto-submit when timer reaches 0
+        // Auto-submit when timer reaches 0
       }
     };
 
@@ -241,10 +244,10 @@ int main()
     if (
       currentAnswer === correctAnswer &&
       !answeredCorrectly[currentQuestion]
-    ) {
+    ) { 
       updatedScore += currentQ.marks;
       setAnsweredCorrectly((prev) => ({ ...prev, [currentQuestion]: true }));
-    }
+    } 
     const email = localStorage.getItem("email");
     if (!email) {
       console.error("No email found in localStorage");

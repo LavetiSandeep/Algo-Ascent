@@ -211,7 +211,7 @@ const HomePage = () => {
       {/* ✅ Start Button */}
       <button
         className="px-6 py-3 mt-8 text-lg text-white transition bg-blue-500 rounded-md hover:bg-blue-700"
-        onClick={() => navigate("/Level1")}
+        onClick={() => navigate("/waiting")}
       >
         Start Level 1
       </button>
