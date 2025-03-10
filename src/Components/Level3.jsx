@@ -56,11 +56,21 @@ const Level3 = () => {
     }
     setLoading(false);
   };
+  useEffect(() => {
+    if (timeLeft === 0) {
+      navigate("/thankyou"); // Redirect when time runs out
+    }
 
+    const timer = setInterval(() => {
+      setTimeLeft((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
+    }, 1000);
+
+    return () => clearInterval(timer); // Cleanup on unmount
+  }, [timeLeft, navigate]);
 
 /*timer*/
   useEffect(() => {
-    const startTime = new Date("2025/03/10 23:10:00").getTime()+1500000;
+    const startTime = new Date("2025/03/10 00:41:00").getTime()+1500000;
     
     const updateTimer = () => {
       const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
