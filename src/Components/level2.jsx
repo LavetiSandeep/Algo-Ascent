@@ -183,7 +183,7 @@ int main()
     // }
 
     const updateTimer = () => {
-      const startTime = new Date("2025/03/10 18:24:00");
+      const startTime = new Date("2025/03/10 19:15:00");
       const elapsedTime = Date.now() - startTime;
 
       const newTimeLeft = Math.max(
