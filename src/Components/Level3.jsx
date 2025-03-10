@@ -38,12 +38,14 @@ const Level3 = () => {
   const handleCompile = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/compilecode", {
+      const response = await fetch("https://backend-jofi.onrender.com/compilecode", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify({ code, input:10, inputRadio:compileWithInput, lang: "C" }),
+
       });  
+
 
       if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
       const data = await response.json(); 
@@ -70,7 +72,7 @@ const Level3 = () => {
 
 /*timer*/
   useEffect(() => {
-    const startTime = new Date("2025/03/10 00:41:00").getTime()+1500000;
+    const startTime = new Date("2025/03/11 00:38:00").getTime()+1500000;
     
     const updateTimer = () => {
       const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
@@ -91,7 +93,7 @@ const Level3 = () => {
     try {
       const email = localStorage.getItem("email"); // Retrieve email from session storage
     
-      const response = await fetch("http://localhost:5000/submitcode", {
+      const response = await fetch("https://backend-jofi.onrender.com/submitcode", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -171,6 +173,7 @@ const Level3 = () => {
       console.error("No email found in local storage.");
       return;
     }
+
   
     try {
       const response = await fetch("https://backend-jofi.onrender.com/updateCode", {

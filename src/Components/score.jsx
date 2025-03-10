@@ -26,7 +26,7 @@ const ScorePage = () => {
       try {
         // Send GET request with email as a query parameter
         // const response = await axios.get (`https://backend-jofi.onrender.com/api/get-scores`);
-        const response = await fetch("http://localhost:5000/api/get-scores", {
+        const response = await fetch("https://backend-jofi.onrender.com/api/get-scores", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

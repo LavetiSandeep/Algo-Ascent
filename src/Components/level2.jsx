@@ -183,7 +183,7 @@ int main()
     // }
 
     const updateTimer = () => {
-      const startTime = new Date("2025/03/10 00:41:00");
+      const startTime = new Date("2025/03/11 00:38:00");
       const elapsedTime = Date.now() - startTime;
 
       const newTimeLeft = Math.max(
@@ -264,7 +264,7 @@ int main()
     }
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/update-level2score",
+        "https://backend-jofi.onrender.com/api/update-level2score",
         {
           email,
           level2Score: updatedScore,

@@ -181,7 +181,7 @@ const Level1 = () => {
         return;
       }
 
-      const response = await fetch("http://localhost:5000/api/update-score", {
+      const response = await fetch("https://backend-jofi.onrender.com/api/update-score", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -248,7 +248,7 @@ const Level1 = () => {
     }
   
     const updateTimer = () => {
-      const startTime = new Date("2025/03/10 00:41:00");
+      const startTime = new Date("2025/03/11 00:38:00");
       const elapsedTime = Date.now() - startTime;
       const newTimeLeft = Math.max(Math.floor((quizDuration - elapsedTime) / 1000), 0);
       
