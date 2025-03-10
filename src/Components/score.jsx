@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
+import { HomeRepairServiceOutlined } from "@mui/icons-material";
 
 const ScorePage = () => {
   const location = useLocation();
@@ -24,8 +25,21 @@ const ScorePage = () => {
     const fetchScores = async () => {
       try {
         // Send GET request with email as a query parameter
-        const response = await axios.get (`https://backend-jofi.onrender.com/api/get-scores?email=${email}`);
-        const { level1Score, level2Score,finalScore } = response.data;
+        // const response = await axios.get (`https://backend-jofi.onrender.com/api/get-scores`);
+        const response = await fetch("http://localhost:5000/api/get-scores", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email, // ✅ Use `finalScore` to ensure the latest value is sent
+          }),
+        });
+        console.log(response);
+        
+        const result= await response.json();
+        // console.log(result);
+        const { level1Score, level2Score, finalScore }=result
       
         // Update the state with the fetched scores and calculated final score
         setScores({ level1Score, level2Score, finalScore });

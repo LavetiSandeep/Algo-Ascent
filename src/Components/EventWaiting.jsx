@@ -64,10 +64,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 const WaitingPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const level1Score = location.state?.level1Score || 0;
+//   const level1Score = location.state?.level1Score || 0;
 
   // Set your predefined synchronized time here
-  const simulatedStartTime = new Date("2025/03/10 16:41:00").getTime()+600000;
+  const simulatedStartTime = new Date("2025/03/10 16:41:00").getTime();
   const [timeLeft, setTimeLeft] = useState(0);
 
   useEffect(() => {
@@ -79,7 +79,7 @@ const WaitingPage = () => {
       if (remainingTime <= 0) {
         // clearInterval(timerInterval);
         console.log("hello")
-        navigate("/level2", { state: { level1Score }, replace: true });
+        navigate("/level1");
       }
     };
 
@@ -87,12 +87,12 @@ const WaitingPage = () => {
     const timerInterval = setInterval(updateTimer, 1000);
 
     return () => clearInterval(timerInterval);
-  }, [navigate, level1Score]);
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen text-center text-white bg-gray-900">
-      <h1 className="mb-4 text-4xl font-bold text-yellow-400">Waiting for Level 2</h1>
-      <p className="text-lg">Level 2 will start soon...</p>
+      <h1 className="mb-4 text-4xl font-bold text-yellow-400">Waiting for Level 1</h1>
+      <p className="text-lg">Level 1 will start soon...</p>
       <p className="mt-2 text-2xl font-semibold text-red-500">
         Time Remaining: {Math.floor(timeLeft / 60)}:{String(Math.floor(timeLeft % 60)).padStart(2, "0")}
       </p>
