@@ -97,24 +97,33 @@ int main()
         answer: "10", 
         marks: 10 
       },
-      { id: 4, 
+      {
+        id: 4, 
         text: (
           <div>
             <p>Consider the following C program:</p>
-            <pre></pre>
             <pre>
-    {`#include <stdio.h>
-   int main() 
-   {int n=5,i,j;
-   for(i = 1; i <= n;i++){
-   for()}
-    ;
-}`}
+      {`#include <stdio.h>
+      
+      int main() {
+          int i, space, rows = 5, k = 0;
+          for (i = 1; i <= rows; ++i, k = 0) {
+              for (space = 1; space <= rows - i; ++space) {
+                  printf("  ");
+              }
+              while (k != 2 * i - 1) {
+                  printf("* ");
+                  ++k;
+              }
+              printf("\\n");
+          }
+          return 0;
+      }`}
             </pre>
             <p>What will be the output of the program?</p>
           </div>
         ),
-        answer: "Hallo", 
+        answer: "        * \n      * * * \n    * * * * * \n  * * * * * * * \n* * * * * * * * * ",
         marks: 10 
       },
       { id: 5, 
@@ -159,7 +168,7 @@ int main()
         marks: 10 
       }
     ];
-    
+ 
     
     setQuestions(customQuestions);
   }, []);
@@ -276,47 +285,52 @@ int main()
   };
 
   return (
-    <div
-      className="relative flex flex-col items-center justify-center min-h-screen p-4 text-white bg-center bg-no-repeat bg-cover"
-      style={{ backgroundImage: "url('/lvl2.jpg')" }} // Add your image path here
-    >
-      {/* ALGO ASCENT - Centered at the Top */}
-      <h1 className="absolute text-5xl font-bold text-transparent transform -translate-x-1/2 top-6 left-1/2 bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-        ALGO ASCENT
-      </h1>
+    <div 
+    className="relative flex flex-col items-center justify-center min-h-screen p-4 text-white bg-center bg-no-repeat bg-cover"
+    style={{ backgroundImage: "url('./public/lvl2.jpg')" }}  // Add your image path here
+  >
+      
 
-      {/* LEVEL-2 - Positioned Closer Beneath */}
-      <h2 className="mt-1 text-3xl font-semibold text-yellow-300">LEVEL-2</h2>
+  
+  {/* ALGO ASCENT - Centered at the Top */}
+  <h1 className="absolute text-5xl font-bold text-transparent transform -translate-x-1/2 top-6 left-1/2 bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+    ALGO ASCENT
+  </h1>
+
+  {/* LEVEL-2 - Positioned Closer Beneath */}
+  <h2 className="mt-1 text-3xl font-semibold text-yellow-300">
+    LEVEL-2
+  </h2>
       {/* Timer (Top Right) */}
       <div className="absolute text-3xl font-bold text-red-400 top-4 right-6">
-        ⏳ {Math.floor(timeLeft / 60)}:
-        {(timeLeft % 60).toString().padStart(2, "0")}
+        ⏳ {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, "0")}
       </div>
-
+  
       {questions.length > 0 ? (
         <>
           {/* Question Container */}
-          <div
-            className="w-full max-w-5xl p-8 bg-white/10 backdrop-blur-lg rounded-lg shadow-2xl 
-                border-[3px] border-pink-400/50 hover:border-pink-400 shadow-pink-500 transition-all"
-          >
+          <div className="w-full max-w-5xl p-4 bg-white/10 backdrop-blur-lg rounded-lg shadow-2xl 
+              border-[3px] border-pink-400/50 hover:border-pink-400 shadow-pink-500 transition-all">
+
+            
             {/* Question Number & Marks */}
             <div className="flex items-center justify-between mb-6">
-              <span className="text-2xl font-semibold text-cyan-400 drop-shadow-lg">
-                Question {currentQuestion + 1} / {questions.length}
-              </span>
-              <h3 className="text-xl transition-all text-cyan-300 drop-shadow-lg hover:text-cyan-200">
-                Marks: {questions[currentQuestion].marks}
-              </h3>
-            </div>
+<span className="text-2xl font-semibold text-cyan-400 drop-shadow-lg">
+  Question {currentQuestion + 1} / {questions.length}
+</span>
+<h3 className="text-xl transition-all text-cyan-300 drop-shadow-lg hover:text-cyan-200">
+  Marks: {questions[currentQuestion].marks}
+</h3>
+</div>
 
+  
             {/* Question and Answer Side-by-Side */}
             <div className="flex items-start gap-8">
               {/* Question Text (Left Side) */}
-              <h2 className="w-1/2 text-2xl font-semibold text-white">
+              <h2 className="w-1/2 font-semibold text-white text-1xl">
                 {questions[currentQuestion]?.text}
               </h2>
-
+  
               {/* Answer Input (Right Side) */}
               <textarea
                 className="flex-grow w-1/2 p-4 text-black bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -326,10 +340,10 @@ int main()
                 onChange={handleAnswerChange}
               ></textarea>
             </div>
-
+  
             {/* Navigation Buttons */}
             <div className="flex justify-between mt-6">
-              <button
+              <button 
                 className="px-6 py-3 text-xl text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50"
                 onClick={handlePrevious}
                 disabled={currentQuestion === 0}
@@ -337,14 +351,14 @@ int main()
                 ⬅ Previous
               </button>
               {currentQuestion < questions.length - 1 ? (
-                <button
+                <button 
                   className="px-6 py-3 text-xl text-white bg-green-600 rounded-lg hover:bg-green-700"
                   onClick={handleNext}
                 >
                   Next ➡
                 </button>
               ) : (
-                <button
+                <button 
                   className="px-6 py-3 text-xl text-white bg-red-600 rounded-lg hover:bg-red-700"
                   onClick={handleSubmit}
                 >
@@ -359,6 +373,6 @@ int main()
       )}
     </div>
   );
-};
+}  
 
 export default Level2;

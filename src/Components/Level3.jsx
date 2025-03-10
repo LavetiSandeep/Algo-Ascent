@@ -18,10 +18,17 @@ const Level3 = () => {
 
   // Test cases
   const testCases = [
-    { id: 1, input: "1", expectedOutput: "2" },
-    { id: 2, input: "2", expectedOutput: "4" },
-    { id: 3, input: "4", expectedOutput: "8" },
-    { id: 4, input: "5", expectedOutput: "10"},
+    { id: 1, input: "12345", expectedOutput: "54321" },
+    { id: 2, input: "1000", expectedOutput: "1" },
+    { id: 3, input: "20002", expectedOutput: "20002"},
+    { id: 4, input: "908070", expectedOutput: "70809" },
+    
+    { id: 5, input: "7", expectedOutput: "7"},
+    { id: 6, input: "5050", expectedOutput: "505"},
+    { id: 7, input: "9999", expectedOutput: "9999"},
+
+
+
   ];
 
   // Compile Code (Run with input)
@@ -33,10 +40,10 @@ const Level3 = () => {
         headers: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify({ code, input:10, inputRadio:compileWithInput, lang: "C" }),
-      });
+      });  
 
       if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-      const data = await response.json();
+      const data = await response.json(); 
 
       setOutput(data.output || "No output received.");
       setSelectedTab("result");
@@ -177,7 +184,7 @@ const Level3 = () => {
     <div className="min-h-screen p-4 text-white bg-gray-800">
       <header className="mb-4">
         <h1 className="text-3xl font-bold">Level 3 - Online IDE</h1>
-        <p className="mt-2">Solve the problem using C language. Test your solution with custom test cases.</p>
+        <p className="mt-2">Given a number N, reverse its digits and print it without leading zeros using C language. Test your solution with custom test cases.</p>
       </header>
 
       {/* Tabs */}
@@ -230,7 +237,7 @@ const Level3 = () => {
       {selectedTab === "testcases" && (
   <div className="mt-4">
     <h2 className="mb-2 text-2xl font-semibold">Test Cases</h2>
-    {testCases.slice(0, 2).map((testCase) => {
+    {testCases.slice(0, 3).map((testCase) => {
      // Find corresponding test result using the testCase id
       const result = testResults.find((r) => r.id === testCase.id);
       return (
@@ -256,7 +263,7 @@ const Level3 = () => {
   </div>
 )}
 
-<div className="absolute top-4 right-4 text-xl font-bold text-red-500">
+<div className="absolute text-xl font-bold text-red-500 top-4 right-4">
   {timeLeft > 0 ? `${Math.floor(timeLeft / 60)}:${String(timeLeft % 60).padStart(2, '0')}` : "Time's up!"}
 </div>
 
