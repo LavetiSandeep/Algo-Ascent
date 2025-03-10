@@ -6,10 +6,10 @@ const Level1 = () => {
   const [score, setScore] = useState(0); // Start fresh
   const [selectedOptions, setSelectedOptions] = useState({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(60); // 20 minutes countdown
+  const [timeLeft, setTimeLeft] = useState(0); // 20 minutes countdown
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [scoreUpdatedQuestions, setScoreUpdatedQuestions] = useState({});
-  const [isManual, setIsManual] = useState(false);
+  // const [isManual, setIsManual] = useState(false);
 
 
   const questions = [
@@ -101,33 +101,6 @@ const Level1 = () => {
 
   // Added useEffect to implement the countdown timer.
   // It decreases 'timeLeft' every second and auto-submits when time runs out.
-  useEffect(() => {
-    const quizDuration = 10 * 60 * 1000 ; // 20 minutes in milliseconds
-    let startTime = localStorage.getItem("quizstartTime");
-  
-    if (!startTime) {
-      startTime = Date.now();
-      localStorage.setItem("quizStartTime", startTime);
-    }
-  
-    const updateTimer = () => {
-      const startTime = new Date("2025/03/09 21:35:00");
-      const elapsedTime = Date.now() - startTime;
-      const newTimeLeft = Math.max(Math.floor((quizDuration - elapsedTime) / 1000), 0);
-
-  
-      setTimeLeft(newTimeLeft);
-  
-      if (newTimeLeft === 0) {
-        handleSubmit(false); // Auto-submit when timer reaches 0
-      }
-    };
-  
-    updateTimer(); // Initial update
-    const timerInterval = setInterval(updateTimer, 1000);
-  
-    return () => clearInterval(timerInterval);
-  }, []);
   
 
   
@@ -176,15 +149,14 @@ const Level1 = () => {
      // Prevent re-submission if already submitted
      if (isSubmitted) return; // <-- New check added
 
-     
     let finalScore = score;
 
 
 
     // newly added to redirect back to level2 
      // ... (score calculation and API call)
-  setIsSubmitted(true);
-  localStorage.setItem("level1Submitted", "true");
+  // setIsSubmitted(true);
+  // localStorage.setItem("level1Submitted", "true");
 
   // Delay navigation to Level2 by 5 seconds, and replace history so user cannot go back
   // setTimeout(() => {
@@ -239,17 +211,44 @@ const Level1 = () => {
     //navigate("/level2", { state: { level1Score: finalScore } });
     
      // 🟢 **If user submitted before time, go to waiting page first**
-  if (isManual) {
     navigate("/waitingpg1", { state: { level1Score: finalScore } });
-    setTimeout(() => {
-      navigate("/level2", { state: { level1Score: finalScore }, replace: true });
-    }, 5000); // 5-second delay before going to Level 2
-  } else {
-    navigate("/level2", { state: { level1Score: finalScore }, replace: true });
-  }
+  //   setTimeout(() => {
+  //     navigate("/level2", { state: { level1Score: finalScore }, replace: true });
+  //   }); // 5-second delay before going to Level 2
+  // } else {
+  //   navigate("/level2", { state: { level1Score: finalScore }, replace: true });
+  // }
  
- 
+ console.log("shdsjs",timeLeft); // remove in future
   };
+  useEffect(() => {
+    const quizDuration = 3 * 60 * 1000 ; // 20 minutes in milliseconds
+    let startTime = localStorage.getItem("quizstartTime");
+  
+    if (!startTime) {
+      startTime = Date.now();
+      localStorage.setItem("quizStartTime", startTime);
+    }
+  
+    const updateTimer = () => {
+      const startTime = new Date("2025/03/10 10:56:00");
+      const elapsedTime = Date.now() - startTime;
+      const newTimeLeft = Math.max(Math.floor((quizDuration - elapsedTime) / 1000), 0);
+      
+      setTimeLeft(newTimeLeft);
+  
+      if (newTimeLeft === 0) {
+       //navigate("/level2");
+         handleSubmit(false); // Auto-submit when timer reaches 0
+      }
+    };
+  
+    updateTimer(); // Initial update
+    const timerInterval = setInterval(updateTimer, 1000);
+  
+    return () => clearInterval(timerInterval);
+  }, []);
+  
   
   return (
     <div
@@ -335,11 +334,7 @@ const Level1 = () => {
 
             // change this
             <button
-  onClick={ () => {handleSubmit(true);
-    setIsManual(true);
-    navigate("/waitingpg1");
-
-  } }// Pass `true` to indicate manual submission
+  onClick={ () => {handleSubmit(true);} }// Pass `true` to indicate manual submission
   disabled={isSubmitted || timeLeft === 0} // Prevents multiple submissions
   className={`px-5 py-2 font-semibold text-white transition bg-red-500 rounded-lg hover:bg-red-600 ${
     isSubmitted ? "opacity-50 cursor-not-allowed" : ""

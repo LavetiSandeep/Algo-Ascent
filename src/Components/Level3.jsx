@@ -50,7 +50,7 @@ const Level3 = () => {
 
 /*timer*/
   useEffect(() => {
-    const startTime = new Date("2025/03/09 18:25:00").getTime();
+    const startTime = new Date("2025/03/10 00:55:00").getTime();
     
     const updateTimer = () => {
       const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
