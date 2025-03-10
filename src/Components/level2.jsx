@@ -37,7 +37,7 @@ const Level2 = () => {
             <p>What will be the output of the program?</p>
           </div>
         ),
-        answer: "0", 
+        answer: "10", 
         marks: 10 
       },
       { id: 2, 
@@ -135,7 +135,7 @@ int main()
             <p>What will be the output of the program?</p>
           </div>
         ),
-        answer: "10", 
+        answer: "5 11 10", 
         marks: 10 
       },
       { id: 6, 
@@ -155,7 +155,7 @@ int main()
             <p>What will be the output of the program?</p>
           </div>
         ),
-        answer: "x,120", 
+        answer: "x 120", 
         marks: 10 
       }
     ];
@@ -174,7 +174,7 @@ int main()
     // }
 
     const updateTimer = () => {
-      const startTime = new Date("2025/03/10 16:41:00");
+      const startTime = new Date("2025/03/10 18:24:00");
       const elapsedTime = Date.now() - startTime;
 
       const newTimeLeft = Math.max(
@@ -255,7 +255,7 @@ int main()
     }
     try {
       const response = await axios.post(
-        "https://backend-jofi.onrender.com/api/update-level2score",
+        "http://localhost:5000/api/update-level2score",
         {
           email,
           level2Score: updatedScore,

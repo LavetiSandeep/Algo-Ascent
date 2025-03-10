@@ -50,11 +50,11 @@ const Level3 = () => {
 
 /*timer*/
   useEffect(() => {
-    const startTime = new Date("2025/03/10 00:55:00").getTime();
+    const startTime = new Date("2025/03/10 18:24:00").getTime()+1500000;
     
     const updateTimer = () => {
       const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-      const remainingTime = Math.max(20 * 60 - elapsedTime, 0);
+      const remainingTime = Math.max(25 * 60 - elapsedTime, 0);
       setTimeLeft(remainingTime);
     };
   

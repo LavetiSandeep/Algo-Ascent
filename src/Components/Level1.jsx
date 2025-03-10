@@ -222,7 +222,7 @@ const Level1 = () => {
  console.log("shdsjs",timeLeft); // remove in future
   };
   useEffect(() => {
-    const quizDuration = 3 * 60 * 1000 ; // 20 minutes in milliseconds
+    const quizDuration = 10 * 60 * 1000 ; // 20 minutes in milliseconds
     let startTime = localStorage.getItem("quizstartTime");
   
     if (!startTime) {
@@ -231,7 +231,7 @@ const Level1 = () => {
     }
   
     const updateTimer = () => {
-      const startTime = new Date("2025/03/10 16:41:00");
+      const startTime = new Date("2025/03/10 18:24:00");
       const elapsedTime = Date.now() - startTime;
       const newTimeLeft = Math.max(Math.floor((quizDuration - elapsedTime) / 1000), 0);
       
