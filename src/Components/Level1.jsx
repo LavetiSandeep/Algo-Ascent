@@ -36,9 +36,9 @@ const Level1 = () => {
       correctAnswer: "it does nothing",
     },
     {
-      question: "",
-      options: ["", "", "", ""],
-      correctAnswer: "",
+      question: "which of the following is about main() function in C ?",
+      options: ["C program must have a main() function", "C program can have  multiple main() functions", "The main() function is optional", " The main() function cannot return any value"],
+      correctAnswer: "C program must have a main() function",
     },    
     {
       question: "Which data structure is best suited for implementing recursion?",
@@ -248,7 +248,7 @@ const Level1 = () => {
     }
   
     const updateTimer = () => {
-      const startTime = new Date("2025/03/10 19:15:00");
+      const startTime = new Date("2025/03/10 23:10:00");
       const elapsedTime = Date.now() - startTime;
       const newTimeLeft = Math.max(Math.floor((quizDuration - elapsedTime) / 1000), 0);
       

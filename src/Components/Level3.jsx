@@ -1,7 +1,10 @@
 
 import React, { useState,useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Level3 = () => {
+
+  const navigate = useNavigate();
   const [code, setCode] = useState("");
   const [output, setOutput] = useState("");
   const [testResults, setTestResults] = useState([]);
@@ -35,7 +38,7 @@ const Level3 = () => {
   const handleCompile = async () => {
     setLoading(true);
     try {
-      const response = await fetch("https://backend-jofi.onrender.com/compilecode", {
+      const response = await fetch("http://localhost:5000/compilecode", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -57,7 +60,7 @@ const Level3 = () => {
 
 /*timer*/
   useEffect(() => {
-    const startTime = new Date("2025/03/10 19:15:00").getTime()+1500000;
+    const startTime = new Date("2025/03/10 23:10:00").getTime()+1500000;
     
     const updateTimer = () => {
       const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
@@ -78,7 +81,7 @@ const Level3 = () => {
     try {
       const email = localStorage.getItem("email"); // Retrieve email from session storage
     
-      const response = await fetch("https://backend-jofi.onrender.com/submitcode", {
+      const response = await fetch("http://localhost:5000/submitcode", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -95,11 +98,13 @@ const Level3 = () => {
       console.log("Server response:", data); // Log full response
   
       if (data.message === "Success") {
+        navigate("/thankyou");
         console.log("Test Case Results:", data.nopass, "passed, ", data.nofail, "failed");
         alert("All test cases passed!");
         setScore(data.score);
         setPass(data.nopass);
         setFail(data.nofail);
+        
       } else {
         console.log("Test Case Results:", data.nopass, "passed, ", data.nofail, "failed");
         alert(`Some test cases failed. Passed: ${data.nopass}, Failed: ${data.nofail}`);

@@ -57,7 +57,7 @@ int main()
     }
     for(k=0;k < i;k++){
     num--;}
-    printf("\\n");
+    
 
     
     }
@@ -69,7 +69,7 @@ int main()
             <p>What will be the output of the program?</p>
           </div>
         ),
-        answer: "1 2 3 4 5\n6 7 8 9\n9 10 11\n10 11\n9", 
+        answer: "12345678991011101110", 
         marks: 10 
       },
       { id: 3, 
@@ -183,7 +183,7 @@ int main()
     // }
 
     const updateTimer = () => {
-      const startTime = new Date("2025/03/10 19:15:00");
+      const startTime = new Date("2025/03/10 23:10:00");
       const elapsedTime = Date.now() - startTime;
 
       const newTimeLeft = Math.max(
