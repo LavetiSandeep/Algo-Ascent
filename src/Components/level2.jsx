@@ -144,7 +144,7 @@ int main()
             <p>What will be the output of the program?</p>
           </div>
         ),
-        answer: "5 11 10", 
+        answer: "51110", 
         marks: 10 
       },
       { id: 6, 
@@ -287,7 +287,7 @@ int main()
   return (
     <div 
     className="relative flex flex-col items-center justify-center min-h-screen p-4 text-white bg-center bg-no-repeat bg-cover"
-    style={{ backgroundImage: "url('/public/lvl2.jpg')" }}  // Add your image path here
+    style={{ backgroundImage: "url('/lvl2.jpg')" }}  // Add your image path here
   >
       
 
