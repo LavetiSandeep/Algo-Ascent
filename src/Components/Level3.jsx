@@ -202,7 +202,7 @@ const Level3 = () => {
   };
   
   return (
-    <div className="min-h-screen p-6 text-white bg-gray-900">
+    <div className="min-h-screen p-6 text-white bg-gray-900"onCopy={handleCopy}>
       <header className="mb-6 text-center">
         <h1 className="text-4xl font-extrabold text-blue-400">Level 3 - Online IDE</h1>
         <p className="mt-3 text-lg text-gray-300">
@@ -284,7 +284,7 @@ const Level3 = () => {
         </div>
       )}
 
-      <div className="absolute text-xl font-bold text-red-500 top-6 right-6">
+      <div className="absolute text-xl font-bold text-red-500 top-6 right-6"onCopy={handleCopy}>
         {timeLeft > 0 ? `${Math.floor(timeLeft / 60)}:${String(timeLeft % 60).padStart(2, "0")}` : "Time's up!"}
       </div>
 
