@@ -10,7 +10,10 @@ const Level1 = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [scoreUpdatedQuestions, setScoreUpdatedQuestions] = useState({});
   // const [isManual, setIsManual] = useState(false);
-
+  const handleCopy = (event) => {
+    event.preventDefault();
+    alert("Copying is not allowed!");
+  };
 
   const questions = [
     {
@@ -292,7 +295,7 @@ const Level1 = () => {
       </div>
 
       {/* Timer */}
-      <div className="absolute p-3 rounded-lg shadow-lg top-5 right-6 bg-white/10 backdrop-blur-md">
+      <div className="absolute p-3 rounded-lg shadow-lg top-5 right-6 bg-white/10 backdrop-blur-md"onCopy={handleCopy}>
         <p className="text-xl font-bold text-red-500">
           Time Left: {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, "0")} 
         </p>

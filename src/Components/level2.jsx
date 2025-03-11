@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-
+const handleCopy = (event) => {
+  event.preventDefault();
+  alert("Copying is not allowed!");
+};
 const Level2 = () => {
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -325,7 +328,7 @@ int main()
 
   
             {/* Question and Answer Side-by-Side */}
-            <div className="flex items-start gap-8">
+            <div className="flex items-start gap-8"onCopy={handleCopy}>
               {/* Question Text (Left Side) */}
               <h2 className="w-1/2 font-semibold text-white text-1xl">
                 {questions[currentQuestion]?.text}

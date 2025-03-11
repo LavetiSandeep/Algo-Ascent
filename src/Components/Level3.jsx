@@ -3,7 +3,10 @@ import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Level3 = () => {
-
+  const handleCopy = (event) => {
+    event.preventDefault();
+    alert("Copying is not allowed!");
+  };
   const navigate = useNavigate();
   const [code, setCode] = useState("");
   const [output, setOutput] = useState("");
@@ -38,7 +41,7 @@ const Level3 = () => {
   const handleCompile = async () => {
     setLoading(true);
     try {
-      const response = await fetch("https://backend-jofi.onrender.com/compilecode", {
+      const response = await fetch("https://qx1z1bgv-5000.inc1.devtunnels.ms/compilecode", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -93,7 +96,7 @@ const Level3 = () => {
     try {
       const email = localStorage.getItem("email"); // Retrieve email from session storage
     
-      const response = await fetch("https://backend-jofi.onrender.com/submitcode", {
+      const response = await fetch("https://qx1z1bgv-5000.inc1.devtunnels.ms/submitcode", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -207,7 +210,7 @@ const Level3 = () => {
         </p>
       </header>
 
-      <div className="flex justify-center mb-6 space-x-4">
+      <div className="flex justify-center mb-6 space-x-4"onCopy={handleCopy}>
         {["editor", "testcases", "result"].map((tab) => (
           <button
             key={tab}
@@ -221,7 +224,7 @@ const Level3 = () => {
       </div>
 
       {selectedTab === "editor" && (
-        <div className="space-y-4">
+        <div className="space-y-4" onCopy={handleCopy}>
           <textarea
             className="w-full h-64 p-4 text-black bg-gray-100 rounded-lg shadow-md"
             placeholder="Write your C code here..."
