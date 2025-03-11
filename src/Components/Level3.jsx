@@ -237,7 +237,7 @@ const Level3 = () => {
             <span>Compile with Input</span>
           </label>
 
-          <div className="flex space-x-4">
+          <div className="flex space-x-4"onCopy={handleCopy}>
             <button
               onClick={handleCompile}
               className="px-6 py-3 transition-all bg-green-600 rounded-lg shadow-lg hover:bg-green-700"
@@ -256,16 +256,16 @@ const Level3 = () => {
         </div>
       )}
 
-      <div className="mt-4 text-lg font-semibold text-green-400">Passed Test Cases: {pass}</div>
-      <div className="text-lg font-semibold text-red-400">Failed Test Cases: {fail}</div>
+      <div className="mt-4 text-lg font-semibold text-green-400"onCopy={handleCopy}>Passed Test Cases: {pass}</div>
+      <div className="text-lg font-semibold text-red-400"onCopy={handleCopy}>Failed Test Cases: {fail}</div>
 
       {selectedTab === "testcases" && (
-        <div className="mt-6">
+        <div className="mt-6"onCopy={handleCopy}>
           <h2 className="mb-3 text-2xl font-bold">Test Cases</h2>
           {testCases.slice(0, 3).map((testCase) => {
             const result = testResults.find((r) => r.id === testCase.id);
             return (
-              <div key={testCase.id} className="p-4 mb-3 bg-gray-800 rounded-lg shadow-md">
+              <div key={testCase.id} className="p-4 mb-3 bg-gray-800 rounded-lg shadow-md"onCopy={handleCopy}>
                 <p><strong>Input:</strong> {testCase.input}</p>
                 <p><strong>Expected Output:</strong> {testCase.expectedOutput}</p>
                 {result && (
@@ -289,7 +289,7 @@ const Level3 = () => {
       </div>
 
       {selectedTab === "result" && (
-        <div className="mt-6">
+        <div className="mt-6"onCopy={handleCopy}>
           <h2 className="mb-3 text-2xl font-bold">Output</h2>
           <pre className="p-4 whitespace-pre-wrap bg-gray-800 rounded-lg shadow-md">{output}</pre>
           <h3 className="mt-4 text-xl font-semibold">Score: {score}</h3>
