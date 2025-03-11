@@ -41,7 +41,7 @@ const Level3 = () => {
   const handleCompile = async () => {
     setLoading(true);
     try {
-      const response = await fetch("https://qx1z1bgv-5000.inc1.devtunnels.ms/compilecode", {
+      const response = await fetch("https://3nj735x8-5000.inc1.devtunnels.ms/compilecode", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -96,7 +96,7 @@ const Level3 = () => {
     try {
       const email = localStorage.getItem("email"); // Retrieve email from session storage
     
-      const response = await fetch("https://qx1z1bgv-5000.inc1.devtunnels.ms/submitcode", {
+      const response = await fetch("https://3nj735x8-5000.inc1.devtunnels.ms/submitcode", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
