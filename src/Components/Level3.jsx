@@ -72,7 +72,7 @@ const Level3 = () => {
 
 /*timer*/
   useEffect(() => {
-    const startTime = new Date("2025/03/11 02:10:00").getTime()+1500000;
+    const startTime = new Date("2025/03/11 10:16:00").getTime()+1500000;
     
     const updateTimer = () => {
       const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
@@ -199,19 +199,21 @@ const Level3 = () => {
   };
   
   return (
-    <div className="min-h-screen p-4 text-white bg-gray-800">
-      <header className="mb-4">
-        <h1 className="text-3xl font-bold">Level 3 - Online IDE</h1>
-        <p className="mt-2">Given a number N, reverse its digits and print it without leading zeros using C language. Test your solution with custom test cases.</p>
+    <div className="min-h-screen p-6 text-white bg-gray-900">
+      <header className="mb-6 text-center">
+        <h1 className="text-4xl font-extrabold text-blue-400">Level 3 - Online IDE</h1>
+        <p className="mt-3 text-lg text-gray-300">
+          Given a number N, reverse its digits and print it without leading zeros using C.
+        </p>
       </header>
 
-      {/* Tabs */}
-      <div className="flex mb-4 space-x-4">
+      <div className="flex justify-center mb-6 space-x-4">
         {["editor", "testcases", "result"].map((tab) => (
           <button
             key={tab}
             onClick={() => setSelectedTab(tab)}
-            className={`px-4 py-2 rounded ${selectedTab === tab ? "bg-blue-600" : "bg-gray-600"}`}
+            className={`px-6 py-3 rounded-lg transition-all duration-300 font-semibold shadow-md 
+            ${selectedTab === tab ? "bg-blue-600 text-white" : "bg-gray-700 hover:bg-gray-600"}`}
           >
             {tab.charAt(0).toUpperCase() + tab.slice(1)}
           </button>
@@ -219,29 +221,30 @@ const Level3 = () => {
       </div>
 
       {selectedTab === "editor" && (
-        <div>
-         <textarea
-  className="w-full h-64 p-2 text-black rounded"
-  placeholder="Write your C code here..."
-  value={code}
-  onChange={(e) => handleCodeChange(e.target.value)}
-/>
+        <div className="space-y-4">
+          <textarea
+            className="w-full h-64 p-4 text-black bg-gray-100 rounded-lg shadow-md"
+            placeholder="Write your C code here..."
+            value={code}
+            onChange={(e) => handleCodeChange(e.target.value)}
+          />
 
-          <label className="block mt-2">
-            Compile with Input:
-            <input type="checkbox" checked={compileWithInput} onChange={(e) => setCompileWithInput(e.target.checked)} className="ml-2" />
-          </label> 
-          <div className="mt-2 space-x-2">
+          <label className="flex items-center space-x-2">
+            <input type="checkbox" checked={compileWithInput} onChange={(e) => setCompileWithInput(e.target.checked)} />
+            <span>Compile with Input</span>
+          </label>
+
+          <div className="flex space-x-4">
             <button
               onClick={handleCompile}
-              className="px-4 py-2 bg-green-600 rounded hover:bg-green-700"
+              className="px-6 py-3 transition-all bg-green-600 rounded-lg shadow-lg hover:bg-green-700"
               disabled={loading}
             >
               {loading ? "Running..." : "Run Code"}
             </button>
             <button
               onClick={handleSubmitCode}
-              className="px-4 py-2 bg-red-600 rounded hover:bg-red-700"
+              className="px-6 py-3 transition-all bg-red-600 rounded-lg shadow-lg hover:bg-red-700"
               disabled={loading}
             >
               {loading ? "Submitting..." : "Submit Code"}
@@ -249,52 +252,48 @@ const Level3 = () => {
           </div>
         </div>
       )}
-      <div>passed testcases : {pass}</div>
-      <div>failed testcases : {fail}</div>
+
+      <div className="mt-4 text-lg font-semibold text-green-400">Passed Test Cases: {pass}</div>
+      <div className="text-lg font-semibold text-red-400">Failed Test Cases: {fail}</div>
 
       {selectedTab === "testcases" && (
-  <div className="mt-4">
-    <h2 className="mb-2 text-2xl font-semibold">Test Cases</h2>
-    {testCases.slice(0, 3).map((testCase) => {
-     // Find corresponding test result using the testCase id
-      const result = testResults.find((r) => r.id === testCase.id);
-      return (
-        <div key={testCase.id} className="p-2 mb-2 border border-gray-600 rounded">
-          <p><strong>Input:</strong> {testCase.input}</p>
-          <p><strong>Expected Output:</strong> {testCase.expectedOutput}</p>
-          {result && (
-            <p>
-              <strong>Status:</strong> 
-              {result.passed ? 
-                <span className="text-green-400">
-                  Passed (Score: {result.score})
-                </span> : 
-                <span className="text-red-400">
-                  Failed (Score: {result.score})
-                </span>
-              }
-            </p>
-          )}
+        <div className="mt-6">
+          <h2 className="mb-3 text-2xl font-bold">Test Cases</h2>
+          {testCases.slice(0, 3).map((testCase) => {
+            const result = testResults.find((r) => r.id === testCase.id);
+            return (
+              <div key={testCase.id} className="p-4 mb-3 bg-gray-800 rounded-lg shadow-md">
+                <p><strong>Input:</strong> {testCase.input}</p>
+                <p><strong>Expected Output:</strong> {testCase.expectedOutput}</p>
+                {result && (
+                  <p>
+                    <strong>Status:</strong>
+                    {result.passed ? (
+                      <span className="ml-2 text-green-400">Passed (Score: {result.score})</span>
+                    ) : (
+                      <span className="ml-2 text-red-400">Failed (Score: {result.score})</span>
+                    )}
+                  </p>
+                )}
+              </div>
+            );
+          })}
         </div>
-      );
-    })}
-  </div>
-)}
+      )}
 
-<div className="absolute text-xl font-bold text-red-500 top-4 right-4">
-  {timeLeft > 0 ? `${Math.floor(timeLeft / 60)}:${String(timeLeft % 60).padStart(2, '0')}` : "Time's up!"}
-</div>
-
+      <div className="absolute text-xl font-bold text-red-500 top-6 right-6">
+        {timeLeft > 0 ? `${Math.floor(timeLeft / 60)}:${String(timeLeft % 60).padStart(2, "0")}` : "Time's up!"}
+      </div>
 
       {selectedTab === "result" && (
-        <div className="mt-4">
-          <h2 className="mb-2 text-2xl font-semibold">Output</h2>
-          <pre className="p-4 whitespace-pre-wrap bg-gray-700 rounded">{output}</pre>
-          <h3 className="mt-4 text-xl">Score: {score}</h3>
+        <div className="mt-6">
+          <h2 className="mb-3 text-2xl font-bold">Output</h2>
+          <pre className="p-4 whitespace-pre-wrap bg-gray-800 rounded-lg shadow-md">{output}</pre>
+          <h3 className="mt-4 text-xl font-semibold">Score: {score}</h3>
         </div>
       )}
     </div>
-  );
+    );
 };
 
 export default Level3;
