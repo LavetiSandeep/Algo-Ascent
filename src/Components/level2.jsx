@@ -27,15 +27,15 @@ const Level2 = () => {
             <p>Consider the following C program:</p>
             <pre>
     {`#include <stdio.h>
- int main()
-    {
+      int main()
+     {
       int a[] = {2, 4, 6, 8, 10};
       int i, sum = 0, *b = a + 4;
       for (i = 0; i < 5; i++)
         sum = sum + (*b - i) - *(b - i);
       printf("%d\\n", sum);
       return 0;
-    }`}
+     }`}
             </pre>
             <p>What will be the output of the program?</p>
           </div>
@@ -66,8 +66,8 @@ int main()
     }
 
     return 0;
- }
-}`}
+    }
+   `}
             </pre>
             <p>What will be the output of the program?</p>
           </div>
@@ -186,7 +186,7 @@ int main()
     // }
 
     const updateTimer = () => {
-      const startTime = new Date("2025/03/11 10:40:00");
+      const startTime = new Date("2025/03/11 13:35:00");
       const elapsedTime = Date.now() - startTime;
 
       const newTimeLeft = Math.max(
