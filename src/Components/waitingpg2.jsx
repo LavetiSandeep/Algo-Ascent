@@ -7,7 +7,7 @@ const WaitingPage2 = () => {
   const level2Score = location.state?.level2Score || 0;
 
   // Set your predefined synchronized time here
-  const simulatedStartTime = new Date("2025/03/12 15:00:00").getTime()+1500000;
+  const simulatedStartTime = new Date("2025/03/12 15:15:00").getTime()+1500000;
   const [timeLeft, setTimeLeft] = useState(0);
 
   useEffect(() => {
