@@ -173,7 +173,7 @@ int main(){
   }, []);
 
   useEffect(() => {
-    const quizDuration = 20 * 60 * 1000; // 20 minutes in milliseconds
+    const quizDuration = 25 * 60 * 1000; // 20 minutes in milliseconds
     // let startTime = localStorage.getItem("startTime");
 
     // if (!startTime) {
