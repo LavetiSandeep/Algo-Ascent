@@ -143,7 +143,7 @@ int main(){
             <p>What will be the output of the program?</p>
           </div>
         ),
-        answer: "51110", 
+        answer: "5 11 10", 
         marks: 10 
       },
       { id: 6, 
@@ -182,7 +182,7 @@ int main(){
     // }
 
     const updateTimer = () => {
-      const startTime = new Date("2025/03/12 09:40:00");
+      const startTime = new Date("2025/03/12 15:00:00");
       const elapsedTime = Date.now() - startTime;
 
       const newTimeLeft = Math.max(
