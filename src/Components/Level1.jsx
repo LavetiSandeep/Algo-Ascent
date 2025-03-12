@@ -251,7 +251,7 @@ const Level1 = () => {
     }
   
     const updateTimer = () => {
-      const startTime = new Date("2025/03/12 08:23:00");
+      const startTime = new Date("2025/03/12 09:37:00");
       const elapsedTime = Date.now() - startTime;
       const newTimeLeft = Math.max(Math.floor((quizDuration - elapsedTime) / 1000), 0);
       

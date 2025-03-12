@@ -8,7 +8,7 @@ const Leaderboard = () => {
       try {
         const response = await fetch("https://backend-jofi.onrender.com/leaderboard");
         const data = await response.json();
-
+  
         if (response.ok) {
           setLeaderboard(data);
         } else {
@@ -18,8 +18,13 @@ const Leaderboard = () => {
         console.error("Failed to fetch leaderboard:", error);
       }
     };
-
+  
+    // Fetch immediately, then every 2 seconds
     fetchLeaderboard();
+    const interval = setInterval(fetchLeaderboard, 2000);
+  
+    // Clear the interval on component unmount
+    return () => clearInterval(interval);
   }, []);
 
   return (
