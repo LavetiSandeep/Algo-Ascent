@@ -123,7 +123,7 @@ const HomePage = () => {
         <div className="flex items-center w-64 p-4 space-x-4 rounded-lg shadow-md">
   {/* Passport-size Image */}
   <img 
-    src="/sandeep.jpg"  // Replace with actual image path
+    src="/kalyani.jpeg"  // Replace with actual image path
     alt="Coordinator" 
     className="object-cover bg-transparent rounded-full w-18 h-18"
   />
