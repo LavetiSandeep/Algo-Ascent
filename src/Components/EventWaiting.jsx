@@ -8,7 +8,7 @@
 //   const navigate = useNavigate();
   
 //   // Set the predefined real-time start time
-//   const simulatedStartTime = new Date("2025/03/11 00:08:00").getTime(); 
+//   const simulatedStartTime = new Date("2025/03/12 00:08:00").getTime(); 
 //   const waitingDuration = 10 * 60 * 1000; // 10 minutes in milliseconds
 //   const endTime = simulatedStartTime + waitingDuration; // When the waiting period ends
 
@@ -67,7 +67,7 @@ const WaitingPage = () => {
 //   const level1Score = location.state?.level1Score || 0;
 
   // Set your predefined synchronized time here
-  const simulatedStartTime = new Date("2025/03/11 13:22:00").getTime();
+  const simulatedStartTime = new Date("2025/03/12 08:23:00").getTime();
   const [timeLeft, setTimeLeft] = useState(0);
 
   useEffect(() => {

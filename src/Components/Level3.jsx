@@ -75,7 +75,7 @@ const Level3 = () => {
 
 /*timer*/
   useEffect(() => {
-    const startTime = new Date("2025/03/11 13:22:00").getTime()+1500000;
+    const startTime = new Date("2025/03/12 08:23:00").getTime()+1500000;
     
     const updateTimer = () => {
       const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
@@ -206,7 +206,7 @@ const Level3 = () => {
       <header className="mb-6 text-center">
         <h1 className="text-4xl font-extrabold text-blue-400">Level 3 - Online IDE</h1>
         <p className="mt-3 text-lg text-gray-300">
-          Given a number N, reverse its digits and print it without leading zeros using C.
+          Given a number positive integer , reverse its digits and print it without leading zeros using C.
         </p>
       </header>
 

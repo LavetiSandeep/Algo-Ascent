@@ -50,29 +50,25 @@ const Level2 = () => {
             <pre></pre>
             <pre>
     {`#include <stdio.h>
- 
-int main() 
- {
-    int n = 5,i,j,k,num = 1;
-    for(i = 0;i < n;i++)
-    {for(j = 0;j < n-i;j++){
-    printf("%d",num++);
+int main(){
+    int n=5,i,j,k,num=1;
+    for(i=0;i<n;i++){
+        for(j=0;j<n-i;j++){
+            printf("%d",num++);
+        }
+        for(k=0;k<i;k++){
+            num--;
+        }
     }
-    for(k=0;k < i;k++){
-    num--;}
-    
-
-    
-    }
-
     return 0;
-    }
+}
+
    `}
             </pre>
             <p>What will be the output of the program?</p>
           </div>
         ),
-        answer: "12345678991011101110", 
+        answer: "1234567899101110119", 
         marks: 10 
       },
       { id: 3, 
@@ -107,21 +103,21 @@ int main()
             <p>Consider the following C program:</p>
             <pre>
       {`#include <stdio.h>
-      
-      int main() {
-          int i, space, rows = 5, k = 0;
-          for (i = 1; i <= rows; ++i, k = 0) {
-              for (space = 1; space <= rows - i; ++space) {
-                  printf("  ");
-              }
-              while (k != 2 * i - 1) {
-                  printf("* ");
-                  ++k;
-              }
-              printf("\\n");
-          }
-          return 0;
-      }`}
+int main(){
+    int i, space, rows = 5, k = 0;
+    for(i = 1; i <= rows; ++i, k = 0){
+        for(space = 1; space <= rows - i; ++space){
+            printf("  ");
+        }
+        while(k != 2 * i - 1){
+            printf("* ");
+            ++k;
+        }
+        printf("\n");
+    }
+    return 0;
+}
+`}
             </pre>
             <p>What will be the output of the program?</p>
           </div>
@@ -186,7 +182,7 @@ int main()
     // }
 
     const updateTimer = () => {
-      const startTime = new Date("2025/03/11 13:22:00");
+      const startTime = new Date("2025/03/12 08:23:00");
       const elapsedTime = Date.now() - startTime;
 
       const newTimeLeft = Math.max(
