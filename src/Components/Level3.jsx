@@ -14,7 +14,8 @@ const Level3 = () => {
   const [selectedTab, setSelectedTab] = useState("editor"); // "editor", "testcases", "result"
   const [score, setScore] = useState(0);
   const [compileWithInput, setCompileWithInput] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [runLoading, setRunLoading] = useState(false);
+  const [submitLoading,setSubmitLoading]=useState(false);
   const [pass, setPass] = useState(0);
   const [fail, setFail] = useState(0);
   const [timeLeft, setTimeLeft] = useState(20 * 60); // 20 minutes in seconds
@@ -39,7 +40,7 @@ const Level3 = () => {
 
   // Compile Code (Run with input)
   const handleCompile = async () => {
-    setLoading(true);
+    setRunLoading(true);
     try {
       const response = await fetch("https://3nj735x8-5000.inc1.devtunnels.ms/compilecode", {
         method: "POST",
@@ -59,7 +60,7 @@ const Level3 = () => {
       setOutput(`Error: ${error.message}`);
       console.error("Compilation error:", error);
     }
-    setLoading(false);
+    setRunLoading(false);
   };
   useEffect(() => {
     if (timeLeft === 0) {
@@ -92,7 +93,7 @@ const Level3 = () => {
 
   // Submit Code (Check Test Cases)
   const handleSubmitCode = async () => {
-    setLoading(true); // Start loading state
+    setSubmitLoading(true); // Start loading state
     try {
       const email = localStorage.getItem("email"); // Retrieve email from session storage
     
@@ -133,7 +134,7 @@ const Level3 = () => {
       console.error("Submission error:", error);
       alert("Error submitting code. Check console for details.");
     } finally {
-      setLoading(false); // Stop loading state
+      setSubmitLoading(false); // Stop loading state
     }
   };
   
@@ -241,16 +242,16 @@ const Level3 = () => {
             <button
               onClick={handleCompile}
               className="px-6 py-3 transition-all bg-green-600 rounded-lg shadow-lg hover:bg-green-700"
-              disabled={loading}
+              disabled={runLoading}
             >
-              {loading ? "Running..." : "Run Code"}
+              {runLoading ? "Running..." : "Run Code"}
             </button>
             <button
               onClick={handleSubmitCode}
               className="px-6 py-3 transition-all bg-red-600 rounded-lg shadow-lg hover:bg-red-700"
-              disabled={loading}
+              disabled={submitLoading}
             >
-              {loading ? "Submitting..." : "Submit Code"}
+              {submitLoading ? "Submitting..." : "Submit Code"}
             </button>
           </div>
         </div>
